@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="36" height="28" viewBox="0 0 36 28">
+  <g id="Icon_menu_point" transform="translate(-55 23.333)">
+    <g id="Icon_menu_point-2" data-name="Icon_menu_point" transform="translate(55 -23.333)">
+      <path id="Path" d="M2,4A2,2,0,1,0,0,2,2,2,0,0,0,2,4Z" transform="translate(0 0)" fill="#829ab1"/>
+      <path id="Path-2" data-name="Path" d="M2,4A2,2,0,1,0,0,2,2,2,0,0,0,2,4Z" transform="translate(0 12)" fill="#829ab1"/>
+      <path id="Path-3" data-name="Path" d="M4,2A2,2,0,1,1,2,0,2,2,0,0,1,4,2Z" transform="translate(0 24)" fill="#829ab1"/>
+      <path id="Path-4" data-name="Path" d="M2,0A2,2,0,0,0,2,4H26a2,2,0,1,0,0-4Z" transform="translate(8 0)" fill="#829ab1"/>
+      <path id="Path-5" data-name="Path" d="M0,2A2,2,0,0,1,2,0H26a2,2,0,1,1,0,4H2A2,2,0,0,1,0,2Z" transform="translate(8 12)" fill="#829ab1"/>
+      <path id="Path-6" data-name="Path" d="M2,0A2,2,0,0,0,2,4H26a2,2,0,1,0,0-4Z" transform="translate(8 24)" fill="#829ab1"/>
+    </g>
+  </g>
+</svg>
