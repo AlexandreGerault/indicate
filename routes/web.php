@@ -11,10 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', function () {
+    return view('welcome');
+})->name('landing_page');
+
+Route::resource('needs', 'NeedsController');
+Route::resource('need-categories', 'NeedsController');
+Route::resource('diagnostics', 'DiagnosticsController');
