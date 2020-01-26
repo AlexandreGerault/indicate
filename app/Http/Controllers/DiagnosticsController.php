@@ -70,7 +70,9 @@ class DiagnosticsController extends Controller
     {
         if($diagnostic->user->isNot(auth()->user())) abort(403);
 
-        return view('diagnostics.show', compact('diagnostic'));
+        $groupedNeeds = $diagnostic->needs()->with('category')->get()->groupBy('category.name');
+
+        return view('diagnostics.show', compact('diagnostic', 'groupedNeeds'));
     }
 
     /**

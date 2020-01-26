@@ -16,12 +16,17 @@
             <div class="your-needs">
                 <h3 class="mb-6 text-2xl">Vos besoins</h3>
 
-                <div class="need-category-result card px-4">
-                    <h4 class="text-2xl text-grey-900">Test cat</h4>
-                    <ul class="text-blue-600 my-4">
-                        <li><i class="fas fa-check-circle mr-2"></i>A need</li>
-                    </ul>
-                </div>
+                @foreach($groupedNeeds as $group)
+                    @dump($group)
+                    <div class="need-category-result card px-4">
+                        <h4 class="text-2xl text-grey-900">{{ $group->first()->category->name }}</h4>
+                        <ul class="text-blue-600 my-4">
+                            @foreach($group as $need)
+                                <li><i class="fas fa-check-circle mr-2"></i>{{ $need->name }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
