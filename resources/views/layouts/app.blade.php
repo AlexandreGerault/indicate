@@ -84,7 +84,7 @@
 </nav>
 <!-- End of navbar -->
 
-<main class="mx-auto max-w-4xl">
+<main class="mx-auto max-w-4xl px-2 lg:px-0">
     @yield('content')
 </main>
 

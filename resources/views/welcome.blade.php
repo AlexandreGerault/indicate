@@ -93,7 +93,7 @@
 
         {{-- Call to action --}}
         <div class="self-center translate-y-1/2">
-            <a class=" button button-secondary " href="#">
+            <a class=" button button-secondary " href="{{ route('register') }}">
                 Essayez maintenant
             </a>
         </div>

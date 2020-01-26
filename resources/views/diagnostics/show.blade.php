@@ -17,7 +17,6 @@
                 <h3 class="mb-6 text-2xl">Vos besoins</h3>
 
                 @foreach($groupedNeeds as $group)
-                    @dump($group)
                     <div class="need-category-result card px-4">
                         <h4 class="text-2xl text-grey-900">{{ $group->first()->category->name }}</h4>
                         <ul class="text-blue-600 my-4">
