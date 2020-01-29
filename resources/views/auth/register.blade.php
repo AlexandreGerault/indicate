@@ -1,65 +1,62 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container mx-auto px-4">
-        <div class="card my-24 max-w-md mx-auto text-grey-900">
-            <h1>Inscription</h1>
-            <form method="POST" action="{{ route('register') }}" class="flex flex-col">
-                @csrf
+        <form method="POST" action="{{ route('register') }}" class="form form__auth">
+            <h1 class="form__auth__title">Inscription</h1>
 
-                <input id="first-name" type="text" class="flat @error('first-name') is-invalid @enderror" name="first-name"
-                       value="{{ old('first-name') }}" required autocomplete="given-name" autofocus placeholder="John"/>
+            @csrf
 
-                @error('first-name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+            <input id="first-name" type="text" class="form__auth__input @error('first-name') form__auth__input__error @enderror" name="first-name"
+                   value="{{ old('first-name') }}" required autocomplete="given-name" autofocus placeholder="John"/>
 
-                <input id="last-name" type="text" class="flat @error('last-name') is-invalid @enderror" name="last-name"
-                       value="{{ old('last-name') }}" required autocomplete="family-name" autofocus placeholder="Doe">
+            @error('first-name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
 
-                @error('last-name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+            <input id="last-name" type="text" class="form__auth__input @error('last-name') form__auth__input__error @enderror" name="last-name"
+                   value="{{ old('last-name') }}" required autocomplete="family-name" autofocus placeholder="Doe">
 
-                <input id="birth-date" type="date" class="flat @error('birth-date') is-invalid @enderror" name="birth-date"
-                       value="{{ old('birth-date') }}" required autocomplete="date" autofocus placeholder="19/02/1998">
+            @error('last-name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
 
-                @error('birth-date')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+            <input id="birth-date" type="date" class="form__auth__input @error('birth-date') form__auth__input__error @enderror" name="birth-date"
+                   value="{{ old('birth-date') }}" required autocomplete="date" autofocus placeholder="19/02/1998">
 
-                <input id="email" type="email" class="flat @error('email') is-invalid @enderror"
-                       name="email" value="{{ old('email') }}" required autocomplete="email"
-                       placeholder="john.doe@example.com">
+            @error('birth-date')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
 
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+            <input id="email" type="email" class="form__auth__input @error('email') form__auth__input__error @enderror"
+                   name="email" value="{{ old('email') }}" required autocomplete="email"
+                   placeholder="john.doe@example.com">
 
-                <input id="password" type="password" class="flat @error('password') is-invalid @enderror"
-                       name="password" required autocomplete="new-password" placeholder="************">
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
 
-                @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
+            <input id="password" type="password" class="form__auth__input @error('password') form__auth__input__error @enderror"
+                   name="password" required autocomplete="new-password" placeholder="************">
 
-                <input id="password-confirm" type="password" class="flat" name="password_confirmation"
-                       required autocomplete="new-password" placeholder="************">
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
 
-                <button type="submit" class="button button-secondary">
-                    Valider l'inscription
-                </button>
-            </form>
-        </div>
-    </div>
+            <input id="password-confirm" type="password" class="form__auth__input" name="password_confirmation"
+                   required autocomplete="new-password" placeholder="************">
+
+            <button type="submit" class="button button__secondary">
+                Valider l'inscription
+            </button>
+        </form>
 @endsection

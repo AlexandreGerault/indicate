@@ -24,55 +24,50 @@
 
 <body>
 <!-- Navbar -->
-<nav class="p-6 shadow">
-    <div class="flex container mx-auto px-4 lg:px-0">
+<nav class="navbar navbar__light">
+    <div class="wrapper">
         {{-- Left part of navbar --}}
-        <img src="{{ asset('img/logo_blue.svg') }}" alt="Logo d'Indicate" class="mr-auto"/>
+        <a href="{{ route('landing_page') }}" title="Page d'accueil">
+            <img src="{{ asset('img/logo_blue.svg') }}" alt="Logo d'Indicate" class="navbar__link navbar__left"/>
+        </a>
         {{-- End of left navbar part--}}
 
         {{-- Right part of navbar--}}
-        <div class="self-center">
-            <div class="lg:hidden">
-                <button
-                    class="flex items-center px-3 py-2 border rounded text-white-200 border-white-400 hover:text-white hover:border-white">
-                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/>
-                    </svg>
-                </button>
+        <div class="navbar__right">
+            <div class="navbar__hamburger">
             </div>
 
-            <ul class="hidden lg:flex lg:-mx-4">
-                <li class="px-4">
+            <ul class="navbar__menu">
+                <li class="navbar__menu__link">
                     <a class="" href="{{ route('landing_page') }}">
                         Accueil
                     </a>
                 </li>
                 @auth()
-                    <li class="px-4">
+                    <li class="navbar__menu__link">
                         <a class="" href="{{ route('diagnostics.create') }}">
                             Créer un diagnostic
                         </a>
                     </li>
-                    <li class="px-4">
+                    <li class="navbar__menu__link">
                         <a class="" href="{{ route('diagnostics.index') }}">
                             Mes diagnostics
                         </a>
                     </li>
-                    <li class="px-4">
+                    <li class="navbar__menu__link">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button>Déconnexion</button>
                         </form>
                     </li>
                 @elseguest()
-                    <li class="px-4">
-                        <a class="" href="{{ route('login') }}">
+                    <li class="navbar__menu__link">
+                        <a href="{{ route('login') }}">
                             Connexion
                         </a>
                     </li>
-                    <li class="px-4">
-                        <a class="" href="{{ route('register') }}">
+                    <li class="navbar__menu__link">
+                        <a href="{{ route('register') }}">
                             Inscription
                         </a>
                     </li>
@@ -84,33 +79,37 @@
 </nav>
 <!-- End of navbar -->
 
-<main class="mx-auto max-w-4xl">
-    @yield('content')
+<main>
+    <div class="wrapper">
+        @yield('content')
+    </div>
 </main>
 
-<footer class="bg-grey-800 text-white py-12">
-    <h3 class="text-center text-2xl font-semibold">{{ config('app.name') }}</h3>
-    <nav class="container mx-auto px-4">
-        <ul>
-            <li class="bg-grey-700 lg:bg-grey-800 rounded p-1 my-2 text-center">
-                <a class="" href="{{ route('landing_page') }}">
-                    Accueil
-                </a>
-            </li>
-            @auth()
-                <li class="bg-grey-700 lg:bg-grey-800 rounded p-1 my-2 text-center">
-                    <a href="{{ route('diagnostics.create') }}">
-                        Créer un diagnostic
+<footer class="footer">
+    <div class="wrapper">
+        <h3 class="footer__title">{{ config('app.name') }}</h3>
+        <nav class="footer__navigation">
+            <ul class="footer__navigation__menu">
+                <li class="footer__navigation__menu__item">
+                    <a class="footer__navigation__menu__link" href="{{ route('landing_page') }}">
+                        Accueil
                     </a>
                 </li>
-            @endauth
-            <li class="bg-grey-700 lg:bg-grey-800  rounded p-1 my-2 text-center">
-                <a href="#">
-                    Mentions légales
-                </a>
-            </li>
-        </ul>
-    </nav>
+                @auth()
+                    <li class="footer__navigation__menu__item">
+                        <a class="footer__navigation__menu__link" href="{{ route('diagnostics.create') }}">
+                            Créer un diagnostic
+                        </a>
+                    </li>
+                @endauth
+                <li class="footer__navigation__menu__item">
+                    <a class="footer__navigation__menu__link" href="#">
+                        Mentions légales
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </footer>
 
 </body>
