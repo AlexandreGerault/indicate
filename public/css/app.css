@@ -166,6 +166,14 @@ body {
   margin-bottom: 1.5rem;
 }
 
+.form__auth__checkbox {
+  margin-bottom: 1.25rem;
+}
+
+.form__auth *[type=submit] {
+  margin: 1.5rem 0;
+}
+
 .button {
   height: 4rem;
   border: none;

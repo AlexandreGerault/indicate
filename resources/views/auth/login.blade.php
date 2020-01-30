@@ -30,7 +30,7 @@
         @endif
 
 
-        <label class="mb-6" for="remember">
+        <label class="form__auth__checkbox" for="remember">
             <input class="" type="checkbox" name="remember"
                    id="remember" {{ old('remember') ? 'checked' : '' }}>
             Se rappeler de moi
