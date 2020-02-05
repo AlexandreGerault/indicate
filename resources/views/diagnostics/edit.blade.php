@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.authenticated')
 
 @section('title', 'Éditer un diagnostic')
 

@@ -1,0 +1,69 @@
+.navbar {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 space(4);
+    background: white;
+
+    &__hamburger {
+        display: none;
+    }
+
+    &__light {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+        color: $primary-900;
+    }
+
+    &__menu {
+        display: flex;
+
+        &__link, &__link input[type="submit"] {
+            border: none;
+            background: none;
+            margin: 0 space(2);
+            font-size: 1.25rem;
+            line-height: 1.25rem;
+            color: inherit;
+            cursor: pointer;
+
+            font-family: 'Nunito', sans-serif;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1280px) {
+        & {
+            position: relative;
+        }
+
+        &__hamburger {
+            display: block;
+            cursor: pointer;
+        }
+
+        &__menu {
+            position: absolute;
+            display: none;
+            right: space(4);
+            top: space(8);
+            flex-direction: column;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            z-index: 99;
+            padding: space(2);
+        }
+
+        &__menu__visible {
+            display: flex;
+        }
+
+        &__menu__link, &__menu__link input[type="submit"] {
+            text-align: center;
+            margin: 0 0 space(2) 0;
+        }
+    }
+}

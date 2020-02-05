@@ -1,7 +1,7 @@
 .footer {
     background: $grey-900;
 
-    padding: space(16) 0 space(16) 0;
+    padding: space(8) 0 space(8) 0;
 
     text-align: center;
 
@@ -9,7 +9,7 @@
         color: white;
         font-size: 1.75rem;
 
-        margin-bottom: space(4);
+        margin-bottom: space(2);
     }
 
     &__navigation__menu {
@@ -17,7 +17,7 @@
         font-size: 1.2rem;
 
         &__item {
-            margin-bottom: space(4);
+            margin-bottom: space(2);
 
             &:last-child {
                 margin: 0;

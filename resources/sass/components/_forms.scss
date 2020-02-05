@@ -1,13 +1,10 @@
-.form {
+.form__auth {
     display: flex;
     flex-direction: column;
     max-width: 448px;
-}
-
-.form__auth {
     box-sizing: border-box;
-    margin: space(16) auto;
-    padding: space(8);
+    margin: space(8) auto;
+    padding: space(4);
     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 
 
@@ -50,5 +47,49 @@
 
     & *[type="submit"] {
         margin: 1.5rem 0;
+    }
+}
+
+.form__create__diagnostic {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: space(4);
+    margin: space(4) 0;
+
+    @media screen and (max-width: 790px) {
+        & {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    & h3 {
+        font-weight: bold;
+        margin-bottom: space(2);
+    }
+
+    &__need__group {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 space(-1);
+    }
+
+    &__need__checkbox {
+        opacity: 0;
+    }
+
+    &__need__checkbox:checked + label {
+        color: white;
+        background: $primary-700;
+    }
+
+    &__need__item {
+        padding: space(2);
+        background: $primary-100;
+        margin: space(1);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
     }
 }

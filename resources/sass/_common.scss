@@ -4,9 +4,12 @@
 @import 'abstracts/variables';
 @import 'abstracts/functions';
 
-@import 'layout/layout';
-@import 'layout/navigation';
-@import 'layout/footer';
-
+@import 'components/cards';
 @import 'components/forms';
 @import 'components/buttons';
+
+
+body {
+    font-family: 'Nunito', sans-serif;
+    color: $grey-900;
+}

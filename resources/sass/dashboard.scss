@@ -1,0 +1,105 @@
+@import 'common';
+
+@import 'layout/authenticated/navigation';
+
+body {
+    display: grid;
+    width: 100%;
+    min-height: 100vh;
+
+    grid-template-areas: "navbar navbar"
+    "sidebar  main"
+    "sidebar  foot";
+    grid-template-columns: 350px 1fr;
+    grid-template-rows: 80px 1fr auto;
+}
+
+.navbar {
+    grid-area: navbar;
+    z-index: 9999;
+}
+
+main {
+    background: $grey-050;
+    grid-area: main;
+
+    section {
+        padding: space(4);
+
+        h2 {
+            font-size: 1rem;
+        }
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+        padding-left: space(-4);
+        padding-right: space(-4);
+
+        &__item {
+            background: white;
+            flex: 1;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            margin: 0 space(4);
+            padding: space(8) space(4);
+            color: $grey-700;
+            border-radius: 5px;
+            border-top: 8px solid $secondary-400;
+            position: relative;
+
+            h2 {
+                font-size: 1.25rem;
+                font-weight: bold;
+                text-align: center;
+                margin-bottom: space(3);
+            }
+
+            p {
+                line-height: 2rem;
+            }
+
+            &__next {
+                position: absolute;
+                right: space(4);
+                bottom: space(4);
+                display: block;
+                border-radius: 5px;
+                padding: space(1);
+
+                &:hover {
+                    background: $primary-050;
+                    transition: background-color .3s;
+                }
+            }
+
+        }
+    }
+}
+
+.sidebar {
+    grid-area: sidebar;
+
+    border-right: 1px solid $grey-100;
+    padding: space(4);
+
+    h2 {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    ul {
+        list-style: circle;
+        margin: space(1) space(2);
+    }
+
+    &__group {
+        padding: space(4) 0;
+        border-bottom: 1px solid $grey-100;
+    }
+}
+
+footer {
+    grid-area: foot;
+}

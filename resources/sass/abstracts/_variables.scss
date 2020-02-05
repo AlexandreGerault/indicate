@@ -1,2 +1,17 @@
+// Variables
+// ==================
+:root {
+    --color: #121C42;
+    --contrast: #4869EE;
+    --gap: 20px;
+    --space: 8px;
+    --border: #D5E3EC;
+    --background: #F7FAFB;
+    --background-light: #FFF;
+    --shadow: #D8E1E8;
+    --list-hover: var(--background);
+}
+
+
 $breakpoint-xl: 1280px;
 $space: 4px;

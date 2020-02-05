@@ -1,0 +1,36 @@
+.hero {
+    padding: 0 space(4);
+    background-image: linear-gradient(to bottom, rgba($primary-600, 0.8), rgba($primary-600, 0.8)), url("/img/landing-hero-bg.jpg");
+    background-size: cover;
+    color: white;
+
+    &__content {
+        min-height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__title {
+        font-size: 4rem;
+        margin: 1.25rem 0;
+    }
+
+    &__catchphrase {
+        font-size: 1.5rem;
+    }
+
+    &__cta {
+        display: flex;
+        justify-content: center;
+        transform: translateY(50%);
+    }
+
+    &__cta.button {
+        margin: auto;
+        max-width: 300px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        margin-bottom: 50%;
+    }
+}
+
