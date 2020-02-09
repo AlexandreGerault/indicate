@@ -1,5 +1,5 @@
 .button {
-    padding: space(2) space(2);
+    padding: space(1) space(1);
     border: none;
     border-radius: 5px;
     font-size: 1rem;
@@ -10,4 +10,9 @@
 .button__secondary {
     background: $secondary-400;
     color: $secondary-900;
+}
+
+.button__primary {
+    background: $primary-400;
+    color: white;
 }

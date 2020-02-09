@@ -168,6 +168,25 @@ a {
   color: #334E68;
 }
 
+.flat,
+.form__auth__input:not([type=hidden]) {
+  background: #F0F4F8;
+  border: none;
+  padding: calc(4 * var(--space));
+  border-radius: 5px;
+  margin: 1.25rem 0;
+}
+
+.flat:first-child,
+.form__auth__input:first-child:not([type=hidden]) {
+  margin: 0 auto 1.25rem auto;
+}
+
+.flat:last-child,
+.form__auth__input:last-child:not([type=hidden]) {
+  margin: 1.25rem auto 0 auto;
+}
+
 .form__auth {
   display: -webkit-box;
   display: flex;
@@ -188,22 +207,6 @@ a {
   font-family: "Nunito", sans-serif;
   font-size: 1.5rem;
   color: #102A43;
-}
-
-.form__auth__input:not([type=hidden]) {
-  background: #F0F4F8;
-  border: none;
-  padding: calc(4 * var(--space));
-  border-radius: 5px;
-  margin: 1.25rem 0;
-}
-
-.form__auth__input:not([type=hidden]):first-child {
-  margin: 0 auto 1.25rem auto;
-}
-
-.form__auth__input:not([type=hidden]):last-child {
-  margin: 1.25rem auto 0 auto;
 }
 
 .form__auth__error {
@@ -273,7 +276,7 @@ a {
 }
 
 .button {
-  padding: calc(2 * var(--space)) calc(2 * var(--space));
+  padding: calc(1 * var(--space)) calc(1 * var(--space));
   border: none;
   border-radius: 5px;
   font-size: 1rem;
@@ -284,6 +287,11 @@ a {
 .button__secondary {
   background: #F7C948;
   color: #8D2B0B;
+}
+
+.button__primary {
+  background: #4098D7;
+  color: white;
 }
 
 body {

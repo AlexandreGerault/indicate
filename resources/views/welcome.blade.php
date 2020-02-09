@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    @include('includes.head')
+@include('includes.head')
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/guest.css') }}" rel="stylesheet">
 </head>
 
-<body>
+<body class="landpage">
 <header class="hero">
     <!-- Navbar -->
     <nav class="navbar navbar__dark">
@@ -32,36 +32,36 @@
                     </li>
                     @auth()
 
-                    <li class="navbar__menu__link">
-                        <a class="" href="{{ route('diagnostics.create') }}">
-                            Créer un diagnostic
-                        </a>
-                    </li>
-                    <li class="navbar__menu__link">
-                        <a class="" href="{{ route('diagnostics.index') }}">
-                            Mes diagnostics
-                        </a>
-                    </li>
-                    <li class="navbar__menu__link">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button>Déconnexion</button>
-                        </form>
-                    </li>
+                        <li class="navbar__menu__link">
+                            <a class="" href="{{ route('diagnostics.create') }}">
+                                Créer un diagnostic
+                            </a>
+                        </li>
+                        <li class="navbar__menu__link">
+                            <a class="" href="{{ route('diagnostics.index') }}">
+                                Mes diagnostics
+                            </a>
+                        </li>
+                        <li class="navbar__menu__link">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button>Déconnexion</button>
+                            </form>
+                        </li>
 
                     @elseguest()
 
-                    <li class="navbar__menu__link">
-                        <a href="{{ route('login') }}">
-                            Connexion
-                        </a>
-                    </li>
+                        <li class="navbar__menu__link">
+                            <a href="{{ route('login') }}">
+                                Connexion
+                            </a>
+                        </li>
 
-                    <li class="navbar__menu__link">
-                        <a href="{{ route('register') }}">
-                            Inscription
-                        </a>
-                    </li>
+                        <li class="navbar__menu__link">
+                            <a href="{{ route('register') }}">
+                                Inscription
+                            </a>
+                        </li>
                     @endauth
 
                 </ul>
@@ -79,110 +79,154 @@
     <!-- End of Marketing text-->
 
     <!-- Call to action -->
-    <a class="hero__cta button button__secondary" href="#">
-        Essayez maintenant
-    </a>
+    <div class="hero__cta">
+        <a class=" button button__secondary" href="#">
+            Essayez maintenant
+        </a>
+    </div>
     <!-- End of Call to action-->
 </header>
 
 <!-- Main -->
 <main>
+    <!-- Our services -->
+    <section class="services__section">
+        <div class="wrapper">
+            <h2>Nos services</h2>
+            <div class="services">
+                <div class="services__item">
+                    <h3>Projet de création</h3>
+                    <div class="services__item__desc">
+                        <p>Recevez de l'aide pour créer votre entreprise !</p>
+                    </div>
+                    <p><a class="" href="#">Réaliser un diagnostic</a></p>
+                </div>
 
-    <!-- Presentation section -->
-    <section class="bg-white">
-        <div class="container mx-auto px-4 text-gray-900">
-            <h2 class="landing-h2 mt-6">Qu'est-ce qu'Indicate ?</h2>
-            <div class="flex flex-col lg:flex-row lg:justify-between lg:-mx-6 leading-loose">
-                <p class="my-6 lg:flex-1 lg:mx-6">Indicate est une plateforme
-                    d'orientation des acteurs qui
-                    permet à tout les acteurs de se
-                    trouver et de travailler en
-                    synergie.</p>
+                <div class="services__item">
+                    <h3>Entreprise</h3>
+                    <div class="services__item__desc">
+                        <p>Trouvez les meilleurs structures de conseils pour votre développement !</p>
+                    </div>
+                    <p><a class="" href="#">Réaliser un diagnostic</a></p>
+                </div>
 
-                <p class="my-6 lg:flex-1 lg:mx-6">Nous avons pour vocation de créer
-                    un écosystème favorable au développement des entreprises,
-                    dans un premier temps en Normandie.</p>
+                <div class="services__item">
+                    <h3>Donneur de conseils</h3>
+                    <div class="services__item__desc">
+                        <p>Inscrivez-vous et apportez votre expertise en conseils !</p>
+                    </div>
+                    <p><a class="" href="#">Je crée une structure de conseils</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of our services -->
 
-                <p class="my-6 lg:flex-1 lg:mx-6">Grâce à un système d'indicateurs
-                    vous serez orienté selon vos
-                    besoins vers le bon interlocuteur</p>
-
+    <!-- Context section -->
+    <section class="context__section">
+        <div class="wrapper">
+            <h2>Contexte</h2>
+            <div class="context">
+                <div>
+                    <img src="/img/graphic.jpg" alt="Graphique illustratif"/>
+                </div>
+                <div>
+                    <p>
+                        Le nombre de création d'entreprises ne cesse de croître. Aujourd'hui, plus de 40% des
+                        entreprises
+                        disparaissent après 3 ans d'existence et ce taux monte à 50% au bout de 5 ans. Pour l'éviter et
+                        pour
+                        permettre une croissance des entreprises l'accès aux conseils et aux accompagnements doit être
+                        simplififé.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
     <!-- End of presentation section -->
 
-    <section class="bg-blue-500">
-        <div class="container mx-auto px-4">
-            <h2 class="landing-h2 text-white">Comment ça marche ?</h2>
+    <!-- Behavior description -->
+    <section class="behavior__section">
+        <div class="wrapper">
+            <h2>Comment ça marche ?</h2>
 
-            <div class="lg:flex lg:-mx-6 leading-loose">
-                <div class="process-item">
-                    <img src="{{ asset('img/pen.svg') }}" alt="Un logo de crayon"/>
-                    <h4>Réalisez un diagnostic</h4>
-                    <p>Pour nous permettre de
-                        cibler les structures en
-                        fonction de vos besoins</p>
+            <div class="behavior__grid">
+                <div>
+                    <div class="behavior__item">
+                        <p class="behavior__item__icon"><img src="{{ asset('img/pen.svg') }}" alt="Un logo de crayon"/></p>
+                        <h3>Réalisez un diagnostic</h3>
+                        <p>Pour nous permettre de
+                            cibler les structures en
+                            fonction de vos besoins</p>
+                    </div>
                 </div>
 
-                <div class="process-item">
-                    <img src="{{ asset('img/list.svg') }}" alt="Un logo de liste"/>
-                    <h4>Compte rendu</h4>
-                    <p>Compte rendu du diagnostic
-                        d'orientation et mise en relation
-                        avec les structures choisies</p>
+                <div>
+                    <div class="behavior__item">
+                        <p class="behavior__item__icon"><img src="{{ asset('img/list.svg') }}" alt="Un logo de liste"/></p>
+                        <h3>Compte rendu</h3>
+                        <p>Compte rendu du diagnostic
+                            d'orientation et mise en relation
+                            avec les structures choisies</p>
+                    </div>
                 </div>
 
-                <div class="process-item">
-                    <img src="{{ asset('img/curve.svg') }}" alt="Un logo de courbe"/>
-                    <h4>Développez-vous</h4>
-                    <p>Trouvez le bon interlocuteur
-                        pour répondre à ses besoins
-                        permet d'augmenter le résultat
-                        net d'une entreprise</p>
+                <div>
+                    <div class="behavior__item">
+                        <p class="behavior__item__icon"><img src="{{ asset('img/curve.svg') }}" alt="Un logo de courbe"/></p>
+                        <h3>Développez-vous</h3>
+                        <p>Trouvez le bon interlocuteur
+                            pour répondre à ses besoins
+                            permet d'augmenter le résultat
+                            net d'une entreprise</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    <!-- End of behavior description -->
 
-    <section class="bg-blue-800">
-        <div class="container mx-auto px-4">
-            <h2 class="landing-h2 text-white">Contactez-nous</h2>
-            <form class="flex flex-col lg:flex-row lg:flex-wrap lg:-mx-4">
-                <input type="email" name="sender" placeholder="john.doe@example.com" class="lg:mx-4 flex-1"/>
-                <input type="text" name="fullname" placeholder="John Doe" class="lg:mx-4 flex-1"/>
-                <textarea placeholder="Bonsoir, je souhaite vous contacter au sujet de..."
-                          class="lg:w-full lg:mx-4"></textarea>
-                <input type="submit" value="Valider" class="lg:mx-4 button button-secondary lg:w-64"/>
+    <section class="contact__section">
+        <div class="wrapper">
+            <h2>Contactez-nous</h2>
+            <form class="contact__form">
+                <input type="email" name="sender" placeholder="john.doe@example.com" class="flat"/>
+                <input type="text" name="fullname" placeholder="John Doe" class="flat"/>
+                <textarea placeholder="Bonsoir, je souhaite vous contacter au sujet de..." class="flat"></textarea>
+                <div class="contact__submit">
+                    <input type="submit" value="Valider" class="button button__secondary"/>
+                </div>
             </form>
         </div>
     </section>
 </main>
 <!-- End of main -->
 
-<footer class="bg-grey-800 text-white py-12">
-    <h3 class="text-center text-2xl font-semibold">{{ config('app.name') }}</h3>
-    <nav class="container mx-auto px-4">
-        <ul>
-            <li class="bg-grey-700 lg:bg-grey-800 rounded p-1 my-2 text-center">
-                <a class="" href="{{ route('landing_page') }}">
-                    Accueil
-                </a>
-            </li>
-            @auth()
-                <li class="bg-grey-700 lg:bg-grey-800 rounded p-1 my-2 text-center">
-                    <a href="{{ route('diagnostics.create') }}">
-                        Créer un diagnostic
+<footer class="footer">
+    <div class="wrapper">
+        <h3 class="footer__title">{{ config('app.name') }}</h3>
+        <nav class="footer__navigation">
+            <ul class="footer__navigation__menu">
+                <li class="footer__navigation__menu__item">
+                    <a class="footer__navigation__menu__link" href="{{ route('landing_page') }}">
+                        Accueil
                     </a>
                 </li>
-            @endauth
-            <li class="bg-grey-700 lg:bg-grey-800  rounded p-1 my-2 text-center">
-                <a href="#">
-                    Mentions légales
-                </a>
-            </li>
-        </ul>
-    </nav>
+                @auth()
+                    <li class="footer__navigation__menu__item">
+                        <a class="footer__navigation__menu__link" href="{{ route('diagnostics.create') }}">
+                            Créer un diagnostic
+                        </a>
+                    </li>
+                @endauth
+                <li class="footer__navigation__menu__item">
+                    <a class="footer__navigation__menu__link" href="#">
+                        Mentions légales
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 </footer>
 
 </body>

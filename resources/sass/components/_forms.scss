@@ -1,3 +1,17 @@
+.flat {
+    background: $grey-050;
+    border: none;
+    padding: space(4);
+    border-radius: 5px;
+    margin: 1.25rem 0;
+    &:first-child {
+        margin: 0 auto 1.25rem auto;
+    }
+    &:last-child {
+        margin: 1.25rem auto 0 auto;
+    }
+}
+
 .form__auth {
     display: flex;
     flex-direction: column;
@@ -18,17 +32,7 @@
     }
 
     &__input:not([type="hidden"]) {
-        background: $grey-050;
-        border: none;
-        padding: space(4);
-        border-radius: 5px;
-        margin: 1.25rem 0;
-        &:first-child {
-            margin: 0 auto 1.25rem auto;
-        }
-        &:last-child {
-            margin: 1.25rem auto 0 auto;
-        }
+        @extend .flat;
     }
 
     &__error {
