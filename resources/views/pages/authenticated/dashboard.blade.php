@@ -10,7 +10,7 @@
 </head>
 
 <body>
-@include('includes.auth_nav')
+@include('includes.navbar')
 
 <div class="sidebar">
     <div class="sidebar__group">

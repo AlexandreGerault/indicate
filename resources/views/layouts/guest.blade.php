@@ -8,61 +8,7 @@
 </head>
 
 <body>
-<!-- Navbar -->
-<nav class="navbar navbar__light">
-    <div class="wrapper">
-        {{-- Left part of navbar --}}
-        <a href="{{ route('landing_page') }}" title="Page d'accueil">
-            <img src="{{ asset('img/logo_blue.svg') }}" alt="Logo d'Indicate" class="navbar__link navbar__left"/>
-        </a>
-        {{-- End of left navbar part--}}
-
-        {{-- Right part of navbar--}}
-        <div class="navbar__right">
-            <div class="navbar__hamburger">
-            </div>
-
-            <ul class="navbar__menu">
-                <li class="navbar__menu__link">
-                    <a class="" href="{{ route('landing_page') }}">
-                        Accueil
-                    </a>
-                </li>
-                @auth()
-                    <li class="navbar__menu__link">
-                        <a class="" href="{{ route('diagnostics.create') }}">
-                            Créer un diagnostic
-                        </a>
-                    </li>
-                    <li class="navbar__menu__link">
-                        <a class="" href="{{ route('diagnostics.index') }}">
-                            Mes diagnostics
-                        </a>
-                    </li>
-                    <li class="navbar__menu__link">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button>Déconnexion</button>
-                        </form>
-                    </li>
-                @elseguest()
-                    <li class="navbar__menu__link">
-                        <a href="{{ route('login') }}">
-                            Connexion
-                        </a>
-                    </li>
-                    <li class="navbar__menu__link">
-                        <a href="{{ route('register') }}">
-                            Inscription
-                        </a>
-                    </li>
-                @endauth
-            </ul>
-        </div>
-        {{-- End of right navbar part--}}
-    </div>
-</nav>
-<!-- End of navbar -->
+@include('includes.navbar')
 
 <main>
     <div class="wrapper">

@@ -8,7 +8,7 @@
 </head>
 
 <body>
-@include('includes.auth_nav')
+@include('includes.navbar')
 
 <main>
     @yield('content')

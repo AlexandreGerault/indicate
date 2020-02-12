@@ -3,8 +3,8 @@
     border: none;
     border-radius: 5px;
     font-size: 1rem;
-    font-family: 'Nunito', sans-serif;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    font-family: inherit;
 }
 
 .button__secondary {
@@ -14,5 +14,10 @@
 
 .button__primary {
     background: $primary-400;
+    color: white;
+}
+
+.button__dark {
+    background: $grey-900;
     color: white;
 }

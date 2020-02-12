@@ -280,8 +280,8 @@ a {
   border: none;
   border-radius: 5px;
   font-size: 1rem;
-  font-family: "Nunito", sans-serif;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  font-family: inherit;
 }
 
 .button__secondary {
@@ -294,9 +294,19 @@ a {
   color: white;
 }
 
+.button__dark {
+  background: #102A43;
+  color: white;
+}
+
+.wrapper {
+  max-width: 1280px;
+  margin: auto;
+}
+
 body {
-  font-family: "Nunito", sans-serif;
   color: #102A43;
+  font-family: "Roboto", serif;
 }
 
 .navbar {
@@ -308,16 +318,11 @@ body {
   -webkit-box-align: center;
           align-items: center;
   padding: 0 calc(4 * var(--space));
-  background: white;
+  font-size: 1.25rem;
 }
 
 .navbar__hamburger {
   display: none;
-}
-
-.navbar__light {
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  color: #003E6B;
 }
 
 .navbar__menu {
@@ -330,11 +335,11 @@ body {
   border: none;
   background: none;
   margin: 0 calc(2 * var(--space));
+  font-family: inherit;
   font-size: 1.25rem;
   line-height: 1.25rem;
   color: inherit;
   cursor: pointer;
-  font-family: "Nunito", sans-serif;
 }
 
 .navbar__menu__link:last-child,
@@ -376,6 +381,22 @@ body {
     text-align: center;
     margin: 0 0 calc(2 * var(--space)) 0;
   }
+}
+
+.navbar__left a {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+}
+
+.navbar__left a svg {
+  margin-right: calc(2 * var(--space));
 }
 
 body {

@@ -49628,17 +49628,29 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/landpage.scss":
+/*!**************************************!*\
+  !*** ./resources/sass/landpage.scss ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ 0:
-/*!***********************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/guest.scss ./resources/sass/authenticated.scss ./resources/sass/dashboard.scss ***!
-  \***********************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/guest.scss ./resources/sass/authenticated.scss ./resources/sass/dashboard.scss ./resources/sass/landpage.scss ***!
+  \******************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! /home/alexandre-gerault/Développement/www/indicate/resources/js/app.js */"./resources/js/app.js");
 __webpack_require__(/*! /home/alexandre-gerault/Développement/www/indicate/resources/sass/guest.scss */"./resources/sass/guest.scss");
 __webpack_require__(/*! /home/alexandre-gerault/Développement/www/indicate/resources/sass/authenticated.scss */"./resources/sass/authenticated.scss");
-module.exports = __webpack_require__(/*! /home/alexandre-gerault/Développement/www/indicate/resources/sass/dashboard.scss */"./resources/sass/dashboard.scss");
+__webpack_require__(/*! /home/alexandre-gerault/Développement/www/indicate/resources/sass/dashboard.scss */"./resources/sass/dashboard.scss");
+module.exports = __webpack_require__(/*! /home/alexandre-gerault/Développement/www/indicate/resources/sass/landpage.scss */"./resources/sass/landpage.scss");
 
 
 /***/ })

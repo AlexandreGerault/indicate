@@ -4,87 +4,34 @@
 @include('includes.head')
 
 <!-- Styles -->
-    <link href="{{ asset('css/guest.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/landpage.css') }}" rel="stylesheet">
 </head>
 
 <body class="landpage">
 <header class="hero">
     <!-- Navbar -->
-    <nav class="navbar navbar__dark">
-        <div class="wrapper">
-            <!-- Left part of navbar -->
-            <a href="{{ route('landing_page') }}" title="Page d'accueil">
-                <img src="{{ asset('img/logo_white.svg') }}" alt="Logo d'Indicate" class="navbar__link navbar__left"/>
-            </a>
-            <!-- End of left navbar part-->
-
-            <!-- Right part of navbar-->
-            <div class="navbar__right">
-                <div class="navbar__hamburger">
-                </div>
-
-                <ul class="navbar__menu">
-
-                    <li class="navbar__menu__link">
-                        <a class="" href="{{ route('landing_page') }}">
-                            Accueil
-                        </a>
-                    </li>
-                    @auth()
-
-                        <li class="navbar__menu__link">
-                            <a class="" href="{{ route('diagnostics.create') }}">
-                                Créer un diagnostic
-                            </a>
-                        </li>
-                        <li class="navbar__menu__link">
-                            <a class="" href="{{ route('diagnostics.index') }}">
-                                Mes diagnostics
-                            </a>
-                        </li>
-                        <li class="navbar__menu__link">
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button>Déconnexion</button>
-                            </form>
-                        </li>
-
-                    @elseguest()
-
-                        <li class="navbar__menu__link">
-                            <a href="{{ route('login') }}">
-                                Connexion
-                            </a>
-                        </li>
-
-                        <li class="navbar__menu__link">
-                            <a href="{{ route('register') }}">
-                                Inscription
-                            </a>
-                        </li>
-                    @endauth
-
-                </ul>
-            </div>
-            <!-- End of right navbar part-->
-        </div>
-    </nav>
+    <div class="wrapper">
+        @include('includes.navbar')
+    </div>
     <!-- End of navbar -->
 
     <!-- Marketing text -->
     <div class="hero__content wrapper">
-        <h1 class="hero__title">Indicate</h1>
-        <p class="hero__catchphrase">Trouvez les bons interlocuteurs et améliorez votre résultat.</p>
+        <div>
+            <h1 class="hero__title">Indicate</h1>
+            <p class="hero__catchphrase">Trouvez les bons interlocuteurs et améliorez votre résultat.</p>
+
+            <!-- Call to action -->
+            <p class="hero__cta">
+                <a class=" button button__secondary" href="#">
+                    Essayez maintenant
+                </a>
+            </p>
+            <!-- End of Call to action-->
+        </div>
     </div>
     <!-- End of Marketing text-->
 
-    <!-- Call to action -->
-    <div class="hero__cta">
-        <a class=" button button__secondary" href="#">
-            Essayez maintenant
-        </a>
-    </div>
-    <!-- End of Call to action-->
 </header>
 
 <!-- Main -->
@@ -95,27 +42,30 @@
             <h2>Nos services</h2>
             <div class="services">
                 <div class="services__item">
+                    <img src="/img/project.jpg" alt="Illustration de projet">
                     <h3>Projet de création</h3>
                     <div class="services__item__desc">
                         <p>Recevez de l'aide pour créer votre entreprise !</p>
                     </div>
-                    <p><a class="" href="#">Réaliser un diagnostic</a></p>
+                    <p class="services__item__cta"><a class="button button__dark" href="#">En savoir plus</a></p>
                 </div>
 
                 <div class="services__item">
+                    <img src="/img/company.jpg" alt="Illustration d'entreprise">
                     <h3>Entreprise</h3>
                     <div class="services__item__desc">
                         <p>Trouvez les meilleurs structures de conseils pour votre développement !</p>
                     </div>
-                    <p><a class="" href="#">Réaliser un diagnostic</a></p>
+                    <p class="services__item__cta"><a class="button button__dark" href="#">En savoir plus</a></p>
                 </div>
 
                 <div class="services__item">
+                    <img src="/img/consulting.jpg" alt="Illustration de consulting">
                     <h3>Donneur de conseils</h3>
                     <div class="services__item__desc">
                         <p>Inscrivez-vous et apportez votre expertise en conseils !</p>
                     </div>
-                    <p><a class="" href="#">Je crée une structure de conseils</a></p>
+                    <p class="services__item__cta"><a class="button button__dark" href="#">En savoir plus</a></p>
                 </div>
             </div>
         </div>
@@ -125,12 +75,12 @@
     <!-- Context section -->
     <section class="context__section">
         <div class="wrapper">
-            <h2>Contexte</h2>
             <div class="context">
                 <div>
                     <img src="/img/graphic.jpg" alt="Graphique illustratif"/>
                 </div>
                 <div>
+                    <h2 class="align-left">Notre projet</h2>
                     <p>
                         Le nombre de création d'entreprises ne cesse de croître. Aujourd'hui, plus de 40% des
                         entreprises
@@ -146,7 +96,7 @@
     <!-- End of presentation section -->
 
     <!-- Behavior description -->
-    <section class="behavior__section">
+<!--<section class="behavior__section">
         <div class="wrapper">
             <h2>Comment ça marche ?</h2>
 
@@ -183,18 +133,28 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!-- End of behavior description -->
 
     <section class="contact__section">
         <div class="wrapper">
             <h2>Contactez-nous</h2>
             <form class="contact__form">
-                <input type="email" name="sender" placeholder="john.doe@example.com" class="flat"/>
-                <input type="text" name="fullname" placeholder="John Doe" class="flat"/>
-                <textarea placeholder="Bonsoir, je souhaite vous contacter au sujet de..." class="flat"></textarea>
+                <div class="input__email">
+                    <label for="email">Adresse e-mail (champ obligatoire)</label>
+                    <input id="email" type="email" name="sender" placeholder="john.doe@example.com" class="flat"/>
+                </div>
+                <div class="input__fullname">
+                    <label for="fullname">Votre nom</label>
+                    <input id="fullname" type="text" name="fullname" placeholder="John Doe" class="flat"/>
+                </div>
+                <div class="input__message">
+                    <label for="message">Votre message</label>
+                    <textarea id="message" placeholder="Bonsoir, je souhaite vous contacter au sujet de..."
+                              class="flat"></textarea>
+                </div>
                 <div class="contact__submit">
-                    <input type="submit" value="Valider" class="button button__secondary"/>
+                    <input type="submit" value="Envoyer" class="button button__secondary"/>
                 </div>
             </form>
         </div>
