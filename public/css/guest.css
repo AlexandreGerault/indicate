@@ -322,7 +322,7 @@ body {
           justify-content: space-between;
   -webkit-box-align: center;
           align-items: center;
-  padding: 0 calc(4 * var(--space));
+  padding: 0 calc(8 * var(--space));
   font-size: 1.25rem;
 }
 

@@ -10,9 +10,7 @@
 <body class="landpage">
 <header class="hero">
     <!-- Navbar -->
-    <div class="wrapper">
-        @include('includes.navbar')
-    </div>
+    @include('includes.navbar')
     <!-- End of navbar -->
 
     <!-- Marketing text -->

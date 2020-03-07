@@ -318,7 +318,7 @@ body {
           justify-content: space-between;
   -webkit-box-align: center;
           align-items: center;
-  padding: 0 calc(4 * var(--space));
+  padding: 0 calc(8 * var(--space));
   font-size: 1.25rem;
 }
 
@@ -400,6 +400,31 @@ body {
   margin-right: calc(2 * var(--space));
 }
 
+.footer {
+  background: #102A43;
+  padding: calc(8 * var(--space)) 0 calc(8 * var(--space)) 0;
+  text-align: center;
+}
+
+.footer__title {
+  color: white;
+  font-size: 1.75rem;
+  margin-bottom: calc(2 * var(--space));
+}
+
+.footer__navigation__menu {
+  color: white;
+  font-size: 1.2rem;
+}
+
+.footer__navigation__menu__item {
+  margin-bottom: calc(2 * var(--space));
+}
+
+.footer__navigation__menu__item:last-child {
+  margin: 0;
+}
+
 body.landpage {
   display: grid;
   grid-template-areas: "hero" "main" "footer";
@@ -408,7 +433,6 @@ body.landpage {
 .landpage .hero {
   grid-area: hero;
   min-height: 600px;
-  padding: 0 calc(4 * var(--space));
   background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(16, 42, 67, 0.6)), to(rgba(16, 42, 67, 0.6))), url("/img/landing-hero-bg.jpg");
   background-image: linear-gradient(to bottom, rgba(16, 42, 67, 0.6), rgba(16, 42, 67, 0.6)), url("/img/landing-hero-bg.jpg");
   background-size: cover;
@@ -660,7 +684,6 @@ body.landpage {
   display: grid;
   grid-template-areas: "mail fullname" "textarea textarea" "submit submit";
   grid-gap: calc(4 * var(--space));
-  max-width: 790px;
   margin: auto;
 }
 
@@ -682,6 +705,7 @@ body.landpage {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
   resize: vertical;
   font: inherit;
+  padding: 1rem;
 }
 
 .landpage section .contact__form div.input__email {
@@ -716,9 +740,5 @@ body.landpage {
     -webkit-box-direction: normal;
             flex-direction: column;
   }
-}
-
-.landpage footer {
-  grid-area: footer;
 }
 

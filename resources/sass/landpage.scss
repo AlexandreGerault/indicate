@@ -1,6 +1,7 @@
 @import '_common';
 
 @import 'layout/guest/_navigation.scss';
+@import 'layout/guest/_footer.scss';
 
 body.landpage {
     display: grid;
@@ -11,7 +12,6 @@ body.landpage {
     .hero {
         grid-area: hero;
         min-height: 600px;
-        padding: 0 space(4);
         background-image: linear-gradient(to bottom, rgba($grey-900, 0.6), rgba($grey-900, 0.6)), url("/img/landing-hero-bg.jpg");
         background-size: cover;
         color: white;
@@ -242,7 +242,6 @@ body.landpage {
             display: grid;
             grid-template-areas: "mail fullname" "textarea textarea" "submit submit";
             grid-gap: space(4);
-            max-width: 790px;
             margin: auto;
 
             div {
@@ -257,6 +256,7 @@ body.landpage {
                     box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
                     resize: vertical;
                     font: inherit;
+                    padding: 1rem;
                 }
             }
 
@@ -291,9 +291,5 @@ body.landpage {
                 }
             }
         }
-    }
-
-    footer {
-        grid-area: footer;
     }
 }
