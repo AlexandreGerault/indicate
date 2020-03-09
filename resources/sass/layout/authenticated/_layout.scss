@@ -1,0 +1,33 @@
+.page__title {
+    font-size: 2rem;
+    margin: space(4) 0;
+    padding-bottom: space(2);
+    border-bottom: 2px solid $grey-200;
+}
+
+body {
+    display: grid;
+    grid-template-areas: "navbar navbar navbar"
+    ". main ."
+    "footer footer footer";
+    grid-template-columns: space(4) 1fr space(4);
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+}
+
+body > nav {
+    grid-area: navbar;
+}
+
+body > main {
+    grid-area: main;
+    max-width: $breakpoint-xl;
+    width: 100%;
+    justify-self: center;
+
+    padding: space(4) 0;
+}
+
+body > footer {
+    grid-area: footer;
+}

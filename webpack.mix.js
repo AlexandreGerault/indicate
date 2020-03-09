@@ -1,5 +1,4 @@
 const mix = require('laravel-mix');
-const tailwindcss = require('tailwindcss')
 
 /*
  |--------------------------------------------------------------------------
@@ -13,10 +12,8 @@ const tailwindcss = require('tailwindcss')
  */
 
 mix.js('resources/js/app.js', 'public/js')
-    .sass('resources/sass/app.scss', 'public/css')
-    .options({
-        processCssUrls: false,
-        postCss: [
-            tailwindcss('./tailwind.config.js')
-        ]
-    });
+    .js('resources/js/authenticated_hamburger_menu.js', 'public/js')
+    .sass('resources/sass/guest.scss', 'public/css')
+    .sass('resources/sass/authenticated.scss', 'public/css')
+    .sass('resources/sass/dashboard.scss', 'public/css')
+    .sass('resources/sass/landpage.scss', 'public/css');

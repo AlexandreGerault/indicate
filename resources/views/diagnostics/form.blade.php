@@ -5,27 +5,28 @@
     @method($method)
     @endif
 
-    <div class="flex flex-col lg:flex-row lg:-mx-4 flex-grow-0 flex-wrap">
+    <div class="form__create__diagnostic">
         @forelse($categories as $category)
-            <div class="lg:mx-4 flex-1 mb-6">
-                <h3 class="mb-2 center">{{ $category->name }}</h3>
-                <div class="flex -mx-2 flex-wrap justify-between">
+            <section class="form__create__diagnostic__need__category">
+                <h3>{{ $category->name }}</h3>
+                <div class="form__create__diagnostic__need__group">
                     @forelse($category->needs as $need)
-                        <input id="need-{{ $need->id }}" value="{{ $need->id }}" class="need-item-checkbox"
+                        <input id="need-{{ $need->id }}" value="{{ $need->id }}"
+                               class="form__create__diagnostic__need__checkbox"
                                type="checkbox"
-                               name="needs[]" hidden/>
-                        <label for="need-{{ $need->id }}">
+                               name="needs[]"/>
+                        <label for="need-{{ $need->id }}" class="form__create__diagnostic__need__item">
                             {{ $need->name }}
                         </label>
                     @empty
                         <p>Cette catégorie ne possède actuellement aucun besoin</p>
                     @endforelse
                 </div>
-            </div>
+            </section>
         @empty
             Il n'y a actuellement aucune catégories de besoin
         @endforelse
     </div>
 
-    <input type="submit" class="button button-secondary" value="{{ $submit }}"/>
+    <input type="submit" class="button button__secondary" value="{{ $submit }}"/>
 </form>

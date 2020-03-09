@@ -1,0 +1,99 @@
+.flat {
+    background: $grey-050;
+    border: none;
+    padding: space(4);
+    border-radius: 5px;
+    margin: 1.25rem 0;
+    &:first-child {
+        margin: 0 auto 1.25rem auto;
+    }
+    &:last-child {
+        margin: 1.25rem auto 0 auto;
+    }
+}
+
+.form__auth {
+    display: flex;
+    flex-direction: column;
+    max-width: 448px;
+    box-sizing: border-box;
+    margin: space(8) auto;
+    padding: space(4);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+
+
+    &__title {
+        margin: 1.5rem 0;
+        text-align: center;
+        text-transform: uppercase;
+        font-family: 'Nunito', sans-serif;
+        font-size: 1.5rem;
+        color: $grey-900;
+    }
+
+    &__input:not([type="hidden"]) {
+        @extend .flat;
+    }
+
+    &__error {
+        color: $red-400;
+    }
+
+    &__secondary__action {
+        font-size: 0.8rem;
+        color: $grey-500;
+        margin-bottom: 1.5rem;
+    }
+
+    &__checkbox {
+        margin-bottom: 1.25rem;
+    }
+
+    & *[type="submit"] {
+        margin: 1.5rem 0;
+    }
+}
+
+.form__create__diagnostic {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: space(4);
+    margin: space(4) 0;
+
+    @media screen and (max-width: 790px) {
+        & {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    & h3 {
+        font-weight: bold;
+        margin-bottom: space(2);
+    }
+
+    &__need__group {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 space(-1);
+    }
+
+    &__need__checkbox {
+        opacity: 0;
+    }
+
+    &__need__checkbox:checked + label {
+        color: white;
+        background: $primary-700;
+    }
+
+    &__need__item {
+        padding: space(2);
+        background: $primary-100;
+        margin: space(1);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+    }
+}

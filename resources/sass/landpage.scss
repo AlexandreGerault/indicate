@@ -1,0 +1,295 @@
+@import '_common';
+
+@import 'layout/guest/_navigation.scss';
+@import 'layout/guest/_footer.scss';
+
+body.landpage {
+    display: grid;
+    grid-template-areas: "hero" "main" "footer";
+}
+
+.landpage {
+    .hero {
+        grid-area: hero;
+        min-height: 600px;
+        background-image: linear-gradient(to bottom, rgba($grey-900, 0.6), rgba($grey-900, 0.6)), url("/img/landing-hero-bg.jpg");
+        background-size: cover;
+        color: white;
+        text-align: center;
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100% - 80px);
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        &__title {
+            font-size: 4rem;
+            margin: 0 0 1.25rem 0;
+        }
+
+        &__catchphrase {
+            font-size: 1.5rem;
+        }
+
+        &__cta {
+            display: flex;
+            justify-content: center;
+            margin-top: space(4);
+        }
+
+        &__cta a {
+            max-width: 300px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            padding: space(2) space(4);
+            background: white;
+            color: $grey-900;
+            border-radius: 50px;
+        }
+    }
+
+    main {
+        grid-area: main;
+    }
+
+    section {
+        padding: space(8) space(4);
+
+        h2 {
+            font-size: 1.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            margin-bottom: space(8);
+        }
+
+        h2.align-left {
+            text-align: left;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-column-gap: space(4);
+
+            .services__item {
+                padding: 0 space(6);
+                display: grid;
+                grid-template-rows: auto 1fr auto;
+                grid-row-gap: space(4);
+                text-align: center;
+
+                &__desc {
+                    justify-self: center;
+                    align-self: center;
+                    padding: 0 space(2);
+                }
+
+                h3 {
+                    font-size: 1.5rem;
+                }
+
+                p {
+                    margin-bottom: space(2);
+                    font-size: 1.125rem;
+                }
+
+                img {
+                    max-width: 100%;
+                    max-height: 200px;
+                    width: 100%;
+                    height: auto;
+                }
+
+                & > p:last-child {
+                    margin-bottom: 0;
+                }
+
+                p a {
+                    padding: space(2) space(4);
+                    border-radius: 500px;
+                }
+            }
+
+            @media screen and (max-width: 1024px) {
+                & {
+                    display: flex;
+                    flex-direction: column;
+                }
+
+                &__item {
+                    display: grid;
+                    grid-template-areas: "img title" "img description" "img cta";
+                    grid-template-columns: 300px 1fr;
+                    margin-bottom: space(8);
+
+                    & > p:last-child {
+                        transform: translateY(space(-2));
+                    }
+
+                    img {
+                        grid-area: img;
+                        max-height: 500px !important;
+                        width: 100% !important;
+                    }
+
+                    h3 {
+                        grid-area: title;
+                    }
+
+                    &__desc {
+                        grid-area: description;
+                    }
+
+                    &__cta {
+                        grid-area: cta;
+                    }
+                }
+            }
+
+            @media screen and (max-width: 750px) {
+                & {
+                    display: flex;
+                    flex-direction: column;
+                    margin-bottom: space(4);
+                }
+
+                &__item {
+                    grid-template-areas: "img" "title" "description" "cta";
+                    grid-template-columns: 1fr;
+
+                    & > p:last-child {
+                        transform: translateY(0);
+                    }
+                }
+            }
+        }
+
+        &.context__section {
+            background: $grey-050;
+        }
+
+        .context {
+            display: flex;
+            margin: space(-4);
+            justify-content: center;
+            align-items: center;
+
+            h2 {
+                margin-bottom: space(4);
+            }
+
+            & > div {
+                flex: 1;
+                margin: space(4);
+
+                img {
+                    width: 100%;
+                }
+            }
+
+            p {
+                font-size: 1.25rem;
+                line-height: 2.5rem;
+            }
+
+            @media screen and (max-width: 790px) {
+                & {
+                    flex-direction: column;
+                }
+            }
+        }
+
+        &.behavior__section {
+            background: $primary-400;
+            color: white;
+        }
+
+        .behavior__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: space(4);
+        }
+
+        .behavior__item {
+            @extend .card;
+            color: $grey-900;
+            font-size: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            h3 {
+                font-weight: bold;
+                margin-top: space(4);
+                margin-bottom: space(4);
+            }
+
+            p {
+                line-height: 3rem;
+            }
+
+        }
+
+        &.contact__section {
+        }
+
+        .contact__form {
+            display: grid;
+            grid-template-areas: "mail fullname" "textarea textarea" "submit submit";
+            grid-gap: space(4);
+            margin: auto;
+
+            div {
+                box-sizing: border-box;
+                display: flex;
+                flex-direction: column;
+                justify-content: stretch;
+
+                input, textarea {
+                    box-sizing: border-box;
+                    width: 100%;
+                    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+                    resize: vertical;
+                    font: inherit;
+                    padding: 1rem;
+                }
+            }
+
+            div.input__email {
+                grid-area: mail;
+            }
+
+            div.input__fullname {
+                grid-area: fullname;
+            }
+
+            div.input__message {
+                grid-area: textarea;
+            }
+
+            .contact__submit {
+                grid-area: submit;
+
+                input {
+                    max-width: 200px;
+                    padding: space(2) space(4);
+                    background: $grey-900;
+                    color: white;
+                    border-radius: 500px;
+                }
+            }
+
+            @media screen and (max-width: $breakpoint-xl) {
+                & {
+                    display: flex;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+}

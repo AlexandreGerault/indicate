@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::get('dashboard', function() {
+    return view('pages.authenticated.dashboard');
+});
+
 Route::get('/', function () {
     return view('welcome');
 })->name('landing_page');
