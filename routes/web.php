@@ -15,14 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('dashboard', function() {
-    return view('pages.authenticated.dashboard');
-});
+/*
+ * Static routes
+ */
+Route::get('/', fn () => view('welcome'))->name('landing_page');
+Route::get('dashboard', fn () => view('pages.authenticated.dashboard'))->name('dashboard');
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('landing_page');
-
+/*
+ * Resources
+ */
 Route::resource('needs', 'NeedsController');
 Route::resource('need-categories', 'NeedsController');
 Route::resource('diagnostics', 'DiagnosticsController');
+Route::resource('contact', 'ContactController');

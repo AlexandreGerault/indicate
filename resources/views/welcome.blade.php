@@ -136,19 +136,32 @@
     <section class="contact__section">
         <div class="wrapper">
             <h2>Contactez-nous</h2>
-            <form class="contact__form">
+            @if ($errors->any())
+                <div class="form__errors">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form class="contact__form" method="POST" action="{{ route('contact.store') }}" is="contact-form">
+                @csrf
                 <div class="input__email">
                     <label for="email">Adresse e-mail (champ obligatoire)</label>
-                    <input id="email" type="email" name="sender" placeholder="john.doe@example.com" class="flat"/>
+                    <input id="email" type="email" name="email" placeholder="john.doe@example.com" class="flat"/>
                 </div>
                 <div class="input__fullname">
-                    <label for="fullname">Votre nom</label>
-                    <input id="fullname" type="text" name="fullname" placeholder="John Doe" class="flat"/>
+                    <label for="name">Votre nom</label>
+                    <input id="name" type="text" name="name" placeholder="John Doe" class="flat"/>
                 </div>
                 <div class="input__message">
                     <label for="message">Votre message</label>
-                    <textarea id="message" placeholder="Bonsoir, je souhaite vous contacter au sujet de..."
-                              class="flat"></textarea>
+                    <textarea
+                        id="message"
+                        placeholder="Bonsoir, je souhaite vous contacter au sujet de..."
+                        name="message"
+                        class="flat"></textarea>
                 </div>
                 <div class="contact__submit">
                     <input type="submit" value="Envoyer" class="button button__secondary"/>

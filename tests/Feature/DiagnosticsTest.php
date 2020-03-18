@@ -28,7 +28,6 @@ class DiagnosticsTest extends TestCase
             ]);
 
         $this->post(route('diagnostics.store'), $attributes);
-
         $this->get(route('diagnostics.create'))->assertOk();
 
         $this->assertDatabaseHas('diagnostics', ['user_id' => $user->id]);
@@ -121,7 +120,7 @@ class DiagnosticsTest extends TestCase
     public function a_user_can_have_diagnostics()
     {
         $user = $this->signIn();
-        $diagnostics = factory(Diagnostic::class, 5)->create(['user_id' => $user->id]);
+        factory(Diagnostic::class, 5)->create(['user_id' => $user->id]);
 
         $this->assertEquals(5, $user->diagnostics->count());
     }
