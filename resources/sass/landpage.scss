@@ -240,7 +240,7 @@ body.landpage {
 
         .contact__form {
             display: grid;
-            grid-template-areas: "mail fullname" "textarea textarea" "submit submit";
+            grid-template-areas: "info info" "mail fullname" "textarea textarea" "submit submit";
             grid-gap: space(4);
             margin: auto;
 

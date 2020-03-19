@@ -300,6 +300,31 @@ a {
   color: white;
 }
 
+.alert {
+  grid-area: info;
+  padding: calc(2 * var(--space)) calc(4 * var(--space));
+  border-radius: 5px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.alert__success {
+  background: #B6E0FE;
+  color: #0A558C;
+}
+
+.alert__failure {
+  background: #FACDCD;
+  color: #780A0A;
+}
+
+.alert__close {
+  position: absolute;
+  cursor: pointer;
+  right: calc(2 * var(--space));
+  top: calc(2 * var(--space));
+}
+
 .wrapper {
   max-width: 1280px;
   margin: auto;
@@ -682,7 +707,7 @@ body.landpage {
 
 .landpage section .contact__form {
   display: grid;
-  grid-template-areas: "mail fullname" "textarea textarea" "submit submit";
+  grid-template-areas: "info info" "mail fullname" "textarea textarea" "submit submit";
   grid-gap: calc(4 * var(--space));
   margin: auto;
 }

@@ -9,8 +9,8 @@
 <body class="landpage">
 <header class="hero">
     <!-- Navbar -->
-    @include('includes.navbar')
-    <!-- End of navbar -->
+@include('includes.navbar')
+<!-- End of navbar -->
 
     <!-- Marketing text -->
     <div class="hero__content wrapper">
@@ -80,59 +80,17 @@
                     <h2 class="align-left">Notre projet</h2>
                     <p>
                         Le nombre de création d'entreprises ne cesse de croître. Aujourd'hui, plus de 40% des
-                        entreprises
-                        disparaissent après 3 ans d'existence et ce taux monte à 50% au bout de 5 ans. Pour l'éviter et
-                        pour
-                        permettre une croissance des entreprises l'accès aux conseils et aux accompagnements doit être
-                        simplififé.
+                        entreprises disparaissent après 3 ans d'existence et ce taux monte à 50% au bout de 5 ans. Pour
+                        l'éviter et pour permettre une croissance des entreprises l'accès aux conseils et aux
+                        accompagnements doit être simplifié.
                     </p>
                 </div>
             </div>
         </div>
     </section>
-    <!-- End of presentation section -->
+    <!-- End of context section -->
 
-    <!-- Behavior description -->
-<!--<section class="behavior__section">
-        <div class="wrapper">
-            <h2>Comment ça marche ?</h2>
-
-            <div class="behavior__grid">
-                <div>
-                    <div class="behavior__item">
-                        <p class="behavior__item__icon"><img src="{{ asset('img/pen.svg') }}" alt="Un logo de crayon"/></p>
-                        <h3>Réalisez un diagnostic</h3>
-                        <p>Pour nous permettre de
-                            cibler les structures en
-                            fonction de vos besoins</p>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="behavior__item">
-                        <p class="behavior__item__icon"><img src="{{ asset('img/list.svg') }}" alt="Un logo de liste"/></p>
-                        <h3>Compte rendu</h3>
-                        <p>Compte rendu du diagnostic
-                            d'orientation et mise en relation
-                            avec les structures choisies</p>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="behavior__item">
-                        <p class="behavior__item__icon"><img src="{{ asset('img/curve.svg') }}" alt="Un logo de courbe"/></p>
-                        <h3>Développez-vous</h3>
-                        <p>Trouvez le bon interlocuteur
-                            pour répondre à ses besoins
-                            permet d'augmenter le résultat
-                            net d'une entreprise</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>-->
-    <!-- End of behavior description -->
-
+    <!-- Contact section -->
     <section class="contact__section">
         <div class="wrapper">
             <h2>Contactez-nous</h2>
@@ -169,6 +127,7 @@
             </form>
         </div>
     </section>
+    <!-- End of contact section -->
 </main>
 <!-- End of main -->
 
