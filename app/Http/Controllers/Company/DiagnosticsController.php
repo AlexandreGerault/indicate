@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Company;
 
-use App\Diagnostic;
-use App\NeedCategory;
+use App\Http\Controllers\Controller;
+use App\Models\Company\Diagnostic;
+use App\Models\Company\NeedCategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -23,7 +24,7 @@ class DiagnosticsController extends Controller
      */
     public function index()
     {
-        return view('diagnostics.index');
+        return view('company.diagnostics.index');
     }
 
     /**
@@ -35,7 +36,7 @@ class DiagnosticsController extends Controller
     {
         $categories = NeedCategory::all();
 
-        return view('diagnostics.create', compact('categories'));
+        return view('company.diagnostics.create', compact('categories'));
     }
 
     /**
@@ -63,7 +64,7 @@ class DiagnosticsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Diagnostic  $diagnostic
+     * @param  Diagnostic  $diagnostic
      * @return Factory|View
      */
     public function show(Diagnostic $diagnostic)
@@ -72,26 +73,26 @@ class DiagnosticsController extends Controller
 
         $groupedNeeds = $diagnostic->needs()->with('category')->get()->groupBy('category.name');
 
-        return view('diagnostics.show', compact('diagnostic', 'groupedNeeds'));
+        return view('company.diagnostics.show', compact('diagnostic', 'groupedNeeds'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Diagnostic  $diagnostic
+     * @param  Diagnostic  $diagnostic
      * @return Factory|View
      */
     public function edit(Diagnostic $diagnostic)
     {
         $categories = NeedCategory::all();
-        return view('diagnostics.edit', compact('diagnostic', 'categories'));
+        return view('company.diagnostics.edit', compact('diagnostic', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Diagnostic  $diagnostic
+     * @param  Diagnostic  $diagnostic
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Diagnostic $diagnostic)
@@ -113,7 +114,7 @@ class DiagnosticsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Diagnostic  $diagnostic
+     * @param  Diagnostic  $diagnostic
      * @return \Illuminate\Http\Response
      */
     public function destroy(Diagnostic $diagnostic)

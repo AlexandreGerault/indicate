@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\ContactMessage;
 use App\Http\Requests\CreateContactMessageRequest;
+use App\Models\ContactMessage;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 
@@ -23,6 +23,7 @@ class ContactController extends Controller
             return response()->json($message, 201);
         }
 
+        $request->session()->flash('success', 'Le message a bien été envoyé !');
         return back();
     }
 }

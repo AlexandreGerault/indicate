@@ -52,12 +52,12 @@
             </li>
             @auth()
                 <li class="navbar__menu__link">
-                    <a class="" href="{{ route('diagnostics.create') }}">
+                    <a class="" href="{{ route('company.diagnostics.create') }}">
                         Créer un diagnostic
                     </a>
                 </li>
                 <li class="navbar__menu__link">
-                    <a class="" href="{{ route('diagnostics.index') }}">
+                    <a class="" href="{{ route('company.diagnostics.index') }}">
                         Mes diagnostics
                     </a>
                 </li>

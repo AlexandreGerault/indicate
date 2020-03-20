@@ -28,13 +28,14 @@ export class ContactFormElement extends HTMLFormElement {
             }),
         };
 
-        fetch(this.action, init)
-            .then((response) => {
-                if (response.ok && response.status === 201)
-                    this.success();
-                else
-                    this.error();
-            });
+        fetch(this.action, init).then((response) => {
+            if (response.ok && response.status === 201) this.success();
+            return response.json();
+        }).then(json => {
+            if(json.errors) {
+                this.error(json.errors)
+            }
+        });
     }
 
 
@@ -48,9 +49,17 @@ export class ContactFormElement extends HTMLFormElement {
 
     /**
      * Called function when the ajax request failed
+     *
+     * @param {object} errors
      */
-    error() {
-        this.prependMessage('Une erreur est survenue', 'failure');
+    error(errors) {
+        let text = `<ul>`;
+        Object.entries(errors).forEach(([input, error]) => {
+            text += `<li>${error}</li>`;
+        });
+        text += `</ul>`;
+        console.log(text);
+        this.prependMessage(text, 'failure');
     }
 
 
@@ -61,8 +70,8 @@ export class ContactFormElement extends HTMLFormElement {
      * @param {string} type
      */
     prependMessage(text, type) {
-        if (this.alert != null) {
-            this.removeChild(this.alert)
+        if (this.alert && document.contains(this.alert)) {
+            this.removeChild(this.alert);
         }
 
         this.alert = document.createElement('alert-box');

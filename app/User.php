@@ -70,6 +70,6 @@ class User extends Authenticatable
      */
     public function diagnostics():HasMany
     {
-        return $this->hasMany(Diagnostic::class);
+        return $this->hasMany(Models\Company\Diagnostic::class);
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNeedsTable extends Migration
+class CreateCompanyNeedsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateNeedsTable extends Migration
      */
     public function up()
     {
-        Schema::create('needs', function (Blueprint $table) {
+        Schema::create('company_needs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedBigInteger('category_id');
@@ -29,6 +29,6 @@ class CreateNeedsTable extends Migration
     public function down()
     {
 
-        Schema::dropIfExists('needs');
+        Schema::dropIfExists('company_needs');
     }
 }

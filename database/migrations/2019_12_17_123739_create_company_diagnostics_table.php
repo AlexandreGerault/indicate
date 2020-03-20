@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDiagnosticsTable extends Migration
+class CreateCompanyDiagnosticsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateDiagnosticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('diagnostics', function (Blueprint $table) {
+        Schema::create('company_diagnostics', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->uuid('uuid')->default(uniqid());
@@ -21,7 +21,7 @@ class CreateDiagnosticsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('diagnostics', function (Blueprint $table) {
+        Schema::table('company_diagnostics', function (Blueprint $table) {
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
@@ -36,9 +36,9 @@ class CreateDiagnosticsTable extends Migration
      */
     public function down()
     {
-        Schema::table('diagnostics', function (Blueprint $table) {
-            $table->dropForeign('diagnostics_user_id_foreign');
+        Schema::table('company_diagnostics', function (Blueprint $table) {
+            $table->dropForeign('company_diagnostics_user_id_foreign');
         });
-        Schema::dropIfExists('diagnostics');
+        Schema::dropIfExists('company_diagnostics');
     }
 }

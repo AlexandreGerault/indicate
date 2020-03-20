@@ -36,33 +36,33 @@
     <!-- Our services -->
     <section class="services__section">
         <div class="wrapper">
-            <h2>Nos services</h2>
+            <h2>Je suis...</h2>
             <div class="services">
                 <div class="services__item">
                     <img src="/img/project.jpg" alt="Illustration de projet">
-                    <h3>Projet de création</h3>
+                    <h3>Un projet de création</h3>
                     <div class="services__item__desc">
                         <p>Recevez de l'aide pour créer votre entreprise !</p>
                     </div>
-                    <p class="services__item__cta"><a class="button button__dark" href="#">En savoir plus</a></p>
+                    <p class="services__item__cta"><a class="button button__dark" href="#">Tester</a></p>
                 </div>
 
                 <div class="services__item">
                     <img src="/img/company.jpg" alt="Illustration d'entreprise">
-                    <h3>Entreprise</h3>
+                    <h3>Une entreprise</h3>
                     <div class="services__item__desc">
                         <p>Trouvez les meilleurs structures de conseils pour votre développement !</p>
                     </div>
-                    <p class="services__item__cta"><a class="button button__dark" href="#">En savoir plus</a></p>
+                    <p class="services__item__cta"><a class="button button__dark" href="#">Tester</a></p>
                 </div>
 
                 <div class="services__item">
                     <img src="/img/consulting.jpg" alt="Illustration de consulting">
-                    <h3>Donneur de conseils</h3>
+                    <h3>Un donneur de conseils</h3>
                     <div class="services__item__desc">
                         <p>Inscrivez-vous et apportez votre expertise en conseils !</p>
                     </div>
-                    <p class="services__item__cta"><a class="button button__dark" href="#">En savoir plus</a></p>
+                    <p class="services__item__cta"><a class="button button__dark" href="#">Tester</a></p>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
         <div class="wrapper">
             <h2>Contactez-nous</h2>
             @if ($errors->any())
-                <div class="form__errors">
+                <div class="alert alert__failure">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -103,10 +103,15 @@
                     </ul>
                 </div>
             @endif
+            @if (Session::has('success'))
+                <div class="alert alert__success">
+                    <p>Le message a bien été envoyé !</p>
+                </div>
+            @endif
             <form class="contact__form" method="POST" action="{{ route('contact.store') }}" is="contact-form">
                 @csrf
                 <div class="input__email">
-                    <label for="email">Adresse e-mail (champ obligatoire)</label>
+                    <label for="email">Adresse e-mail</label>
                     <input id="email" type="email" name="email" placeholder="john.doe@example.com" class="flat"/>
                 </div>
                 <div class="input__fullname">
@@ -143,7 +148,7 @@
                 </li>
                 @auth()
                     <li class="footer__navigation__menu__item">
-                        <a class="footer__navigation__menu__link" href="{{ route('diagnostics.create') }}">
+                        <a class="footer__navigation__menu__link" href="{{ route('company.diagnostics.create') }}">
                             Créer un diagnostic
                         </a>
                     </li>

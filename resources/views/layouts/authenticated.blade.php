@@ -26,7 +26,7 @@
                 </li>
                 @auth()
                     <li class="footer__navigation__menu__item">
-                        <a class="footer__navigation__menu__link" href="{{ route('diagnostics.create') }}">
+                        <a class="footer__navigation__menu__link" href="{{ route('company.diagnostics.create') }}">
                             Créer un diagnostic
                         </a>
                     </li>

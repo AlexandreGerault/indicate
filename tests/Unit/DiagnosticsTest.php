@@ -2,8 +2,10 @@
 
 namespace Tests\Unit;
 
-use \App\Diagnostic;
-use \App\Need;
+use \App\CompanyDiagnostic;
+use \App\CompanyNeed;
+use App\Models\Company\Diagnostic;
+use App\Models\Company\Need;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -39,6 +41,6 @@ class DiagnosticsTest extends TestCase
     {
         $diag = factory(Diagnostic::class)->create();
 
-        $this->assertEquals('/diagnostics/' . $diag->id, $diag->path());
+        $this->assertEquals('/company/diagnostics/' . $diag->id, $diag->path());
     }
 }

@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\NeedCategory;
+use App\CompanyNeedCategory;
 use Faker\Generator as Faker;
 
-$factory->define(NeedCategory::class, function (Faker $faker) {
+$factory->define(App\Models\Company\NeedCategory::class, function (Faker $faker) {
     return [
         'name' => $faker->sentence(1)
     ];

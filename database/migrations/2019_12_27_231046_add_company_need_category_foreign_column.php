@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNeedCategoryForeignColumn extends Migration
+class AddCompanyNeedCategoryForeignColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class AddNeedCategoryForeignColumn extends Migration
      */
     public function up()
     {
-        Schema::table('needs', function (Blueprint $table) {
+        Schema::table('company_needs', function (Blueprint $table) {
             $table->foreign('category_id')
                 ->references('id')
-                ->on('need_categories')
+                ->on('company_need_categories')
                 ->onDelete('cascade');
         });
     }
@@ -28,8 +28,8 @@ class AddNeedCategoryForeignColumn extends Migration
      */
     public function down()
     {
-        Schema::table('needs', function (Blueprint $table) {
-            $table->dropForeign('needs_category_id_foreign');
+        Schema::table('company_needs', function (Blueprint $table) {
+            $table->dropForeign('company_needs_category_id_foreign');
         });
     }
 }

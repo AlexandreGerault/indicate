@@ -18,13 +18,18 @@ Auth::routes();
 /*
  * Static routes
  */
-Route::get('/', fn () => view('welcome'))->name('landing_page');
-Route::get('dashboard', fn () => view('pages.authenticated.dashboard'))->name('dashboard');
+Route::get('/', fn() => view('welcome'))->name('landing_page');
+Route::get('dashboard', fn() => view('pages.authenticated.dashboard'))->name('dashboard');
 
 /*
  * Resources
  */
-Route::resource('needs', 'NeedsController');
-Route::resource('need-categories', 'NeedsController');
-Route::resource('diagnostics', 'DiagnosticsController');
+Route::prefix('company')
+    ->name('company.')
+    ->namespace('Company')
+    ->group(function () {
+        Route::resource('needs', 'NeedsController');
+        Route::resource('need-categories', 'NeedCategoriesController');
+        Route::resource('diagnostics', 'DiagnosticsController');
+    });
 Route::resource('contact', 'ContactController');

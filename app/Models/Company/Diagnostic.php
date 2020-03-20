@@ -1,7 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Models\Company;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,6 +14,8 @@ class Diagnostic extends Model
         'uuid',
         'user_id'
     ];
+
+    protected $table = 'company_diagnostics';
 
     /**
      * The attributes that should be mutated to dates.
@@ -37,7 +40,12 @@ class Diagnostic extends Model
      */
     public function needs():BelongsToMany
     {
-        return $this->belongsToMany(Need::class);
+        return $this->belongsToMany(
+            Need::class,
+            'company_diagnostic_need',
+            'diagnostic_id',
+            'need_id'
+        );
     }
 
     /**
@@ -55,7 +63,7 @@ class Diagnostic extends Model
      */
     public function path():string
     {
-        return route('diagnostics.show', ['diagnostic' => $this], false);
+        return route('company.diagnostics.show', ['diagnostic' => $this], false);
     }
 
     /**

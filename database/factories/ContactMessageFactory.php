@@ -2,7 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\ContactMessage;
+use App\Models\ContactMessage;
 use Faker\Generator as Faker;
 
 $factory->define(ContactMessage::class, function (Faker $faker) {

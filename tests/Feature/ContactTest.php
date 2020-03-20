@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\ContactMessage;
+use App\Models\ContactMessage;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;

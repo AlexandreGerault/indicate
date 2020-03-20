@@ -29,4 +29,19 @@ class CreateContactMessageRequest extends FormRequest
             'message' => 'required|string|max:4000'
         ];
     }
+
+    /**
+     * Get the error messages
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.required' => 'Vous devez renseignez votre nom.',
+            'email.required' => 'Veuillez indiquer une adresse mail pour être contacté en retour.',
+            'message.required' => 'Vous devez écrire un message avant de soumettre le formulaire.',
+            'message.max' => 'Le message est limité à 4000 caractères.'
+        ];
+    }
 }

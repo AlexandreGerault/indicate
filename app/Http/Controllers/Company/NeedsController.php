@@ -1,17 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Company;
 
-use App\Need;
-use App\NeedCategory;
+use App\Http\Controllers\Controller;
+use App\Models\Company\Need;
+use App\Models\Company\NeedCategory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class NeedsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -21,7 +23,7 @@ class NeedsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|Response|\Illuminate\View\View
      */
     public function create()
     {
@@ -35,8 +37,8 @@ class NeedsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -44,17 +46,17 @@ class NeedsController extends Controller
 
         $validated = $request->validate([
             'name' => 'required|string',
-            'category_id' => 'required|numeric|exists:need_categories,id'
+            'category_id' => 'required|numeric|exists:company_need_categories,id'
         ], $request->all());
 
-        Need::create($validated);
+        $need = Need::create($validated);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -65,7 +67,7 @@ class NeedsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -75,9 +77,9 @@ class NeedsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -88,7 +90,7 @@ class NeedsController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {

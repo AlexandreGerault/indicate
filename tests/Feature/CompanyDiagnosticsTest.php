@@ -2,14 +2,16 @@
 
 namespace Tests\Feature;
 
-use App\Diagnostic;
-use App\Need;
+use App\CompanyDiagnostic;
+use App\CompanyNeed;
+use App\Models\Company\Diagnostic;
+use App\Models\Company\Need;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class DiagnosticsTest extends TestCase
+class CompanyDiagnosticsTest extends TestCase
 {
     use WithFaker, RefreshDatabase;
 
@@ -27,10 +29,10 @@ class DiagnosticsTest extends TestCase
                 'needs' => array_map(fn($x) => $x['id'], $needs->toArray())
             ]);
 
-        $this->post(route('diagnostics.store'), $attributes);
-        $this->get(route('diagnostics.create'))->assertOk();
+        $this->post(route('company.diagnostics.store'), $attributes);
+        $this->get(route('company.diagnostics.create'))->assertOk();
 
-        $this->assertDatabaseHas('diagnostics', ['user_id' => $user->id]);
+        $this->assertDatabaseHas('company_diagnostics', ['user_id' => $user->id]);
     }
 
     /** @test */
@@ -48,7 +50,7 @@ class DiagnosticsTest extends TestCase
             ->assertRedirect($diagnostic->path());
         $this->get($diagnostic->path() . '/edit')->assertOk();
 
-        $this->assertDatabaseHas('diagnostics', ['id' => $diagnostic->id]);
+        $this->assertDatabaseHas('company_diagnostics', ['id' => $diagnostic->id]);
         $this->assertEquals($needs->pluck('id'), $diagnostic->needs->pluck('id'));
     }
 
@@ -72,7 +74,7 @@ class DiagnosticsTest extends TestCase
 
         $diagnostics = factory(Diagnostic::class, 6)->create(['user_id' => $user->id]);
 
-        $this->get(route('diagnostics.index'))
+        $this->get(route('company.diagnostics.index'))
             ->assertOk()
             ->assertSee('diagnostic');
     }
@@ -95,8 +97,8 @@ class DiagnosticsTest extends TestCase
 
         $attributes = factory(Diagnostic::class)->raw(['user_id' => $user->id, 'needs' => []]);
 
-        $this->post(route('diagnostics.store'), $attributes)->assertSessionHasErrors('needs');
-        $this->patch(route('diagnostics.update',
+        $this->post(route('company.diagnostics.store'), $attributes)->assertSessionHasErrors('needs');
+        $this->patch(route('company.diagnostics.update',
             array_merge(
                 ['diagnostic' => $diagnostic = factory(Diagnostic::class)->create(['user_id' => $user->id])->id],
                 $attributes
@@ -109,11 +111,11 @@ class DiagnosticsTest extends TestCase
     {
         $diagnostic = factory(Diagnostic::class)->create();
 
-        $this->get(route('diagnostics.create'))->assertStatus(302);
-        $this->post(route('diagnostics.store'))->assertStatus(302);
-        $this->get(route('diagnostics.show', compact('diagnostic')))->assertStatus(302);
-        $this->patch(route('diagnostics.update', compact('diagnostic')))->assertStatus(302);
-        $this->get(route('diagnostics.edit', compact('diagnostic')))->assertStatus(302);
+        $this->get(route('company.diagnostics.create'))->assertStatus(302);
+        $this->post(route('company.diagnostics.store'))->assertStatus(302);
+        $this->get(route('company.diagnostics.show', compact('diagnostic')))->assertStatus(302);
+        $this->patch(route('company.diagnostics.update', compact('diagnostic')))->assertStatus(302);
+        $this->get(route('company.diagnostics.edit', compact('diagnostic')))->assertStatus(302);
     }
 
     /** @test */
@@ -131,6 +133,6 @@ class DiagnosticsTest extends TestCase
         $user = $this->signIn();
         $diagnostic = factory(Diagnostic::class)->create(['user_id' => factory(User::class)]);
 
-        $this->get(route('diagnostics.show', compact('diagnostic')))->assertStatus(403);
+        $this->get(route('company.diagnostics.show', compact('diagnostic')))->assertStatus(403);
     }
 }
