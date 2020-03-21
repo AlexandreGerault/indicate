@@ -9,6 +9,8 @@ use App\Models\Company\Need;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Tests\TestCase;
 
 class CompanyDiagnosticsTest extends TestCase
@@ -72,7 +74,7 @@ class CompanyDiagnosticsTest extends TestCase
 
         $user = $this->signIn();
 
-        $diagnostics = factory(Diagnostic::class, 6)->create(['user_id' => $user->id]);
+        factory(Diagnostic::class, 6)->create(['user_id' => $user->id]);
 
         $this->get(route('company.diagnostics.index'))
             ->assertOk()
@@ -111,11 +113,64 @@ class CompanyDiagnosticsTest extends TestCase
     {
         $diagnostic = factory(Diagnostic::class)->create();
 
-        $this->get(route('company.diagnostics.create'))->assertStatus(302);
         $this->post(route('company.diagnostics.store'))->assertStatus(302);
         $this->get(route('company.diagnostics.show', compact('diagnostic')))->assertStatus(302);
         $this->patch(route('company.diagnostics.update', compact('diagnostic')))->assertStatus(302);
         $this->get(route('company.diagnostics.edit', compact('diagnostic')))->assertStatus(302);
+    }
+
+    /** @test
+     *
+     * - Store the diagnostic in the session
+     * - When registered/logged store it to the database
+     */
+    public function a_guest_can_create_a_diagnostic()
+    {
+        $user = factory(User::class)->create();
+
+        $needs = factory(Need::class, 3)->create();
+        $attributes = factory(Diagnostic::class)
+            ->raw([
+                'user_id' => null,
+                'needs' => array_map(fn($x) => $x['id'], $needs->toArray())
+            ]);
+
+        $this->get(route('company.diagnostics.create'))->assertOk();
+        $this->post(route('company.diagnostics.store', $attributes))->assertRedirect(route('login'));
+
+        $this->assertEquals($attributes, Session::get('pending_company_diagnostic'));
+
+        $this->actingAs($user)->post(route('company.diagnostics.store'), Session::get('pending_company_diagnostic'));
+        $this->assertDatabaseHas('company_diagnostics', ['user_id' => $user->id]);
+    }
+
+    /** @test
+     *
+     * When a guest submit the creation form it stores the input in session. This function test that it is being
+     * persisted when the guest logs in.
+     */
+    public function it_creates_the_diagnostic_when_user_logs_in()
+    {
+        $credentials = [
+            'email' => 'test@test.tld',
+            'password' => Hash::make('pass')
+        ];
+        $user = factory(User::class)->create($credentials);
+
+        $needs = factory(Need::class, 3)->create();
+        $attributes = factory(Diagnostic::class)
+            ->raw([
+                'user_id' => null,
+                'needs' => array_map(fn($x) => $x['id'], $needs->toArray())
+            ]);
+
+        $this->get(route('company.diagnostics.create'))->assertOk();
+        $this->post(route('company.diagnostics.store', $attributes))->assertRedirect(route('login'));
+        $this->post(route('login'), $credentials);
+        $this->actingAs($user)->get(route('landing_page'));
+
+        $this->assertDatabaseHas('company_diagnostics', ['user_id' => $user->id]);
+        $this->assertFalse(Session::has('pending_company_diagnostic'));
     }
 
     /** @test */
@@ -130,7 +185,7 @@ class CompanyDiagnosticsTest extends TestCase
     /** @test */
     public function a_user_must_own_a_diagnostic_to_view_it()
     {
-        $user = $this->signIn();
+        $this->signIn();
         $diagnostic = factory(Diagnostic::class)->create(['user_id' => factory(User::class)]);
 
         $this->get(route('company.diagnostics.show', compact('diagnostic')))->assertStatus(403);

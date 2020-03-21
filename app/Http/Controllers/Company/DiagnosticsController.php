@@ -6,15 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\NeedCategory;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class DiagnosticsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['create', 'store']);
     }
 
     /**
@@ -42,23 +45,31 @@ class DiagnosticsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param Request $request
+     * @return RedirectResponse|Redirector
      */
     public function store(Request $request)
     {
-
         $needs_validated = $request->validate([
             'needs' => 'required|array',
-        ]);
+        ])['needs'];
 
-        $diagnostic = Diagnostic::create([
-            'user_id' => auth()->user()->id,
-            'uuid' => uniqid()
-        ]);
-        $diagnostic->addNeeds($needs_validated['needs']);
+        if(auth()->guest()) {
+            $request->session()->put('pending_company_diagnostic',  [
+                'user_id' => null,
+                'needs' => $needs_validated
+            ]);
 
-        return redirect($diagnostic->path());
+            return redirect(route('login'));
+        } else {
+            $diagnostic = Diagnostic::create([
+                'user_id' => auth()->user()->id,
+                'uuid' => uniqid()
+            ]);
+            $diagnostic->addNeeds($needs_validated);
+
+            return redirect($diagnostic->path());
+        }
     }
 
     /**
@@ -91,9 +102,9 @@ class DiagnosticsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  Diagnostic  $diagnostic
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return RedirectResponse|Redirector
      */
     public function update(Request $request, Diagnostic $diagnostic)
     {

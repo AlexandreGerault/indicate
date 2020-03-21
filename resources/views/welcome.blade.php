@@ -44,7 +44,11 @@
                     <div class="services__item__desc">
                         <p>Recevez de l'aide pour créer votre entreprise !</p>
                     </div>
-                    <p class="services__item__cta"><a class="button button__dark" href="#">Tester</a></p>
+                    <p class="services__item__cta">
+                        <a class="button button__dark" href="#">
+                            Tester
+                        </a>
+                    </p>
                 </div>
 
                 <div class="services__item">
@@ -53,7 +57,11 @@
                     <div class="services__item__desc">
                         <p>Trouvez les meilleurs structures de conseils pour votre développement !</p>
                     </div>
-                    <p class="services__item__cta"><a class="button button__dark" href="#">Tester</a></p>
+                    <p class="services__item__cta">
+                        <a class="button button__dark" href="{{ route('company.diagnostics.create') }}">
+                            Tester
+                        </a>
+                    </p>
                 </div>
 
                 <div class="services__item">
@@ -62,7 +70,11 @@
                     <div class="services__item__desc">
                         <p>Inscrivez-vous et apportez votre expertise en conseils !</p>
                     </div>
-                    <p class="services__item__cta"><a class="button button__dark" href="#">Tester</a></p>
+                    <p class="services__item__cta">
+                        <a class="button button__dark" href="#">
+                            Tester
+                        </a>
+                    </p>
                 </div>
             </div>
         </div>

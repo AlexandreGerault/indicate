@@ -11,7 +11,7 @@ class NeedCategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        \Illuminate\Support\Facades\DB::table('need_categories')->insert(
+        \Illuminate\Support\Facades\DB::table('company_need_categories')->insert(
             [
                 ['name' => 'Finance'],
                 ['name' => 'Clientèle'],
