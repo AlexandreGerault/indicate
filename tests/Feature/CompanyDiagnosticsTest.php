@@ -2,8 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\CompanyDiagnostic;
-use App\CompanyNeed;
+use App\Models\Company;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\Need;
 use App\User;
@@ -20,8 +19,6 @@ class CompanyDiagnosticsTest extends TestCase
     /** @test */
     public function a_user_can_store_diagnostic()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->signIn();
 
         $needs = factory(Need::class, 3)->create();
@@ -40,8 +37,6 @@ class CompanyDiagnosticsTest extends TestCase
     /** @test */
     public function a_user_can_update_a_diagnostic()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->signIn();
         $needs = factory(Need::class, 2)->create();
 
@@ -59,7 +54,6 @@ class CompanyDiagnosticsTest extends TestCase
     /** @test */
     public function a_user_can_view_a_diagnostic()
     {
-        $this->withoutExceptionHandling();
         $user = $this->signIn();
 
         $diagnostic = factory(Diagnostic::class)->create(['user_id' => $user->id]);
@@ -121,8 +115,8 @@ class CompanyDiagnosticsTest extends TestCase
 
     /** @test
      *
-     * - Store the diagnostic in the session
-     * - When registered/logged store it to the database
+     *  - Store the diagnostic in the session
+     *  - When registered/logged store it to the database
      */
     public function a_guest_can_create_a_diagnostic()
     {
@@ -146,8 +140,8 @@ class CompanyDiagnosticsTest extends TestCase
 
     /** @test
      *
-     * When a guest submit the creation form it stores the input in session. This function test that it is being
-     * persisted when the guest logs in.
+     *  When a guest submit the creation form it stores the input in session. This function test that it is being
+     *  persisted when the guest logs in.
      */
     public function it_creates_the_diagnostic_when_user_logs_in()
     {
@@ -179,7 +173,7 @@ class CompanyDiagnosticsTest extends TestCase
         $user = $this->signIn();
         factory(Diagnostic::class, 5)->create(['user_id' => $user->id]);
 
-        $this->assertEquals(5, $user->diagnostics->count());
+        $this->assertCount(5, $user->diagnostics);
     }
 
     /** @test */
@@ -189,5 +183,84 @@ class CompanyDiagnosticsTest extends TestCase
         $diagnostic = factory(Diagnostic::class)->create(['user_id' => factory(User::class)]);
 
         $this->get(route('company.diagnostics.show', compact('diagnostic')))->assertStatus(403);
+    }
+
+    /** @test
+     *  When the diagnostic is created, no company should be attached
+     */
+    public function no_company_when_created()
+    {
+        $user = $this->signIn();
+        $diagnostic = factory(Diagnostic::class)->create(['user_id' => $user->id]);
+
+        $this->assertNull($diagnostic->company);
+    }
+
+    /** @test
+     *
+     *  A company can be associated to the diagnostic
+     */
+    public function it_can_associate_an_existing_company()
+    {
+        $user = $this->signIn();
+
+        $diagnostic = factory(Diagnostic::class)->create();
+        $company = factory(Company::class)->create();
+
+        $this->actingAs($user)
+            ->post($diagnostic->path() . '/company/set', ['company_id' => $company->id])
+            ->assertRedirect($diagnostic->path());
+
+        $diagnostic = $diagnostic->refresh();
+
+        $this->assertEquals($company->id, $diagnostic->company->id);
+    }
+
+    /** @test
+     *
+     *  A guest shouldn't be able to attach a company to the diagnostic
+     */
+    public function guest_should_not_be_able_to_attach_a_company()
+    {
+        $diagnostic = factory(Diagnostic::class)->create();
+        $company = factory(Company::class)->create();
+
+        $this->post($diagnostic->path() . '/company/set', ['company_id' => $company->id])
+             ->assertRedirect(route('login'));
+    }
+
+    /** @test
+     *
+     *  This test checks that a user has a link to create a company if no company is linked to the diagnostic.
+     *  Because no company is associated to the user in this test, it doesn't show the select company action.
+     */
+    public function it_has_company_creation_action_when_no_company_associated()
+    {
+        $diagnostic = factory(Diagnostic::class)->create();
+
+        $this->actingAs($diagnostic->user)
+             ->get($diagnostic->path())
+             ->assertOk()
+             ->assertSee(route('companies.create'));
+    }
+
+    /** @test
+     *
+     *  When no company is linked to the diagnostic BUT user has at least one company, it should show two actions:
+     *  - Select a company the auth user already has ;
+     *  - Create a new company.
+     */
+    public function it_has_company_actions_when_no_company_associated()
+    {
+        $diagnostic = factory(Diagnostic::class)->create();
+        $companies = factory(Company::class, 3)->create();
+
+        $diagnostic->user->companies()->attach($companies);
+
+        $this->actingAs($diagnostic->user)
+             ->get($diagnostic->path())
+             ->assertOk()
+             ->assertSee(route('companies.create'))
+             ->assertSee(route('company.diagnostics.set-company', ['diagnostic' => $diagnostic]));
     }
 }

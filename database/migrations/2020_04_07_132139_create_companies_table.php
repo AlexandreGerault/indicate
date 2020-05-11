@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCompanyDiagnosticsTable extends Migration
+class CreateCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateCompanyDiagnosticsTable extends Migration
      */
     public function up()
     {
-        Schema::create('company_diagnostics', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('company_id')->nullable();
-            $table->uuid('uuid')->default(uniqid());
-            $table->integer('step')->default(1);
+            $table->string('name');
+            $table->string('status');
+            $table->string('phone');
+            $table->string('mail');
+            $table->string('responsible');
+            $table->date('founded_at');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateCompanyDiagnosticsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_diagnostics');
+        Schema::dropIfExists('companies');
     }
 }

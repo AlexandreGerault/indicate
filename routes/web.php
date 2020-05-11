@@ -24,6 +24,7 @@ Route::get('dashboard', fn() => view('pages.authenticated.dashboard'))->name('da
 /*
  * Resources
  */
+Route::resource('companies', 'CompaniesController');
 Route::prefix('company')
     ->name('company.')
     ->namespace('Company')
@@ -31,5 +32,6 @@ Route::prefix('company')
         Route::resource('needs', 'NeedsController');
         Route::resource('need-categories', 'NeedCategoriesController');
         Route::resource('diagnostics', 'DiagnosticsController');
+        Route::post('diagnostics/{diagnostic}/company/set', 'DiagnosticsController@setCompany')->name('diagnostics.set-company');
     });
 Route::resource('contact', 'ContactController');

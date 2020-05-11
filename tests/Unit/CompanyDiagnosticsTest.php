@@ -2,17 +2,15 @@
 
 namespace Tests\Unit;
 
-use \App\CompanyDiagnostic;
-use \App\CompanyNeed;
+use App\Models\Company;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\Need;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class DiagnosticsTest extends TestCase
+class CompanyDiagnosticsTest extends TestCase
 {
-
     use RefreshDatabase;
 
     /** @test */
@@ -42,5 +40,17 @@ class DiagnosticsTest extends TestCase
         $diag = factory(Diagnostic::class)->create();
 
         $this->assertEquals('/company/diagnostics/' . $diag->id, $diag->path());
+    }
+
+    /** @test */
+    public function it_can_belongs_to_a_company()
+    {
+        $diag = factory(Diagnostic::class)->create();
+        $company = factory(Company::class)->create();
+
+        $diag->company()->associate($diag);
+        $diag->save();
+
+        $this->assertEquals($company->id, $diag->company->id);
     }
 }

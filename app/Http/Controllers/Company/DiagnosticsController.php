@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\NeedCategory;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\View\View;
 
 class DiagnosticsController extends Controller
@@ -23,7 +23,7 @@ class DiagnosticsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function index()
     {
@@ -66,6 +66,7 @@ class DiagnosticsController extends Controller
                 'user_id' => auth()->user()->id,
                 'uuid' => uniqid()
             ]);
+
             $diagnostic->addNeeds($needs_validated);
 
             return redirect($diagnostic->path());
@@ -131,5 +132,27 @@ class DiagnosticsController extends Controller
     public function destroy(Diagnostic $diagnostic)
     {
         //
+    }
+
+    /**
+     * Associate a company to the diagnostic
+     *
+     * @param Request $request
+     * @param Diagnostic $diagnostic
+     * @return RedirectResponse|Redirector
+     */
+    public function setCompany(Request $request, Diagnostic $diagnostic)
+    {
+        $validator = Validator::make($request->all(), [
+            'company_id' => 'required|integer|exists:companies,id'
+        ]);
+
+        if (! $validator->fails()) {
+            $diagnostic->company()->associate(Company::find($request->get('company_id')));
+            $diagnostic->save();
+            return redirect($diagnostic->path());
+        } else {
+            abort(500);
+        }
     }
 }

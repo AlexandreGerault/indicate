@@ -552,7 +552,7 @@ body > footer {
 .diagnostic__section .need__category__grid {
   display: grid;
   grid-gap: calc(4 * var(--space));
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 @media screen and (max-width: 790px) {

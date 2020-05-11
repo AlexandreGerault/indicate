@@ -2,6 +2,7 @@
 
 namespace App\Models\Company;
 
+use App\Models\Company;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -49,11 +50,23 @@ class Diagnostic extends Model
     }
 
     /**
+     * The user that asked the diagnostic
+     *
      * @return BelongsTo
      */
     public function user():BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * The company the diagnostic belongs to
+     *
+     * @return BelongsTo
+     */
+    public function company():BelongsTo
+    {
+        return $this->belongsTo(Company::class);
     }
 
     /**
