@@ -3,8 +3,10 @@
 namespace Tests\Unit;
 
 use App\Models\Company;
+use App\Models\Company\Comment;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\Need;
+use App\Models\Company\NeedCategory;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -52,5 +54,18 @@ class CompanyDiagnosticsTest extends TestCase
         $diag->save();
 
         $this->assertEquals($company->id, $diag->company->id);
+    }
+
+    /** @test
+     *
+     *  Find the comment of a given category
+     */
+    public function it_can_find_a_category_comment()
+    {
+        $diag = factory(Diagnostic::class)->create();
+        $cat = factory(NeedCategory::class)->create();
+        $comment = factory(Comment::class)->create(['diagnostic_id' => $diag->id, 'category_id' => $cat->id]);
+
+        $this->assertEquals($comment->id, $diag->commentOfCategory($cat)->id);
     }
 }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Company;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateCompanyDiagnosticRequest;
 use App\Models\Company;
+use App\Models\Company\Comment;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\NeedCategory;
 use Illuminate\Contracts\View\Factory;
@@ -45,19 +47,20 @@ class DiagnosticsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param CreateCompanyDiagnosticRequest $request
      * @return RedirectResponse|Redirector
      */
-    public function store(Request $request)
+    public function store(CreateCompanyDiagnosticRequest $request)
     {
-        $needs_validated = $request->validate([
-            'needs' => 'required|array',
-        ])['needs'];
+        $validated = $request->validated();
+        $needs_validated = $validated['needs'];
+        $comments_validated = array_filter($validated, fn($key) => (preg_match('#^comment-[0-9]+$#', $key) && $validated[$key]), ARRAY_FILTER_USE_KEY);
 
-        if(auth()->guest()) {
-            $request->session()->put('pending_company_diagnostic',  [
+        if (auth()->guest()) {
+            $request->session()->put('pending_company_diagnostic', [
                 'user_id' => null,
-                'needs' => $needs_validated
+                'needs' => $needs_validated,
+                'comments' => $comments_validated
             ]);
 
             return redirect(route('login'));
@@ -68,6 +71,15 @@ class DiagnosticsController extends Controller
             ]);
 
             $diagnostic->addNeeds($needs_validated);
+            foreach ($comments_validated as $key => $content) {
+                preg_match('#([0-9]+)$#', $key, $matches);
+                $categroryId = $matches[0];
+                $comment = new Comment;
+                $comment->content = $content;
+                $comment->diagnostic()->associate($diagnostic);
+                $comment->category()->associate($categroryId);
+                $comment->save();
+            }
 
             return redirect($diagnostic->path());
         }
@@ -76,12 +88,12 @@ class DiagnosticsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Diagnostic  $diagnostic
+     * @param Diagnostic $diagnostic
      * @return Factory|View
      */
     public function show(Diagnostic $diagnostic)
     {
-        if($diagnostic->user->isNot(auth()->user())) abort(403);
+        if ($diagnostic->user->isNot(auth()->user())) abort(403);
 
         $groupedNeeds = $diagnostic->needs()->with('category')->get()->groupBy('category.name');
 
@@ -91,7 +103,7 @@ class DiagnosticsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Diagnostic  $diagnostic
+     * @param Diagnostic $diagnostic
      * @return Factory|View
      */
     public function edit(Diagnostic $diagnostic)
@@ -104,12 +116,12 @@ class DiagnosticsController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  Diagnostic  $diagnostic
+     * @param Diagnostic $diagnostic
      * @return RedirectResponse|Redirector
      */
     public function update(Request $request, Diagnostic $diagnostic)
     {
-        if($diagnostic->user->isNot(auth()->user())) {
+        if ($diagnostic->user->isNot(auth()->user())) {
             abort(403);
         }
 
@@ -126,7 +138,7 @@ class DiagnosticsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Diagnostic  $diagnostic
+     * @param Diagnostic $diagnostic
      * @return \Illuminate\Http\Response
      */
     public function destroy(Diagnostic $diagnostic)
@@ -147,7 +159,7 @@ class DiagnosticsController extends Controller
             'company_id' => 'required|integer|exists:companies,id'
         ]);
 
-        if (! $validator->fails()) {
+        if (!$validator->fails()) {
             $diagnostic->company()->associate(Company::find($request->get('company_id')));
             $diagnostic->save();
             return redirect($diagnostic->path());

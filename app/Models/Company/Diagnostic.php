@@ -36,6 +36,17 @@ class Diagnostic extends Model
         $this->save();
     }
 
+    public function addComment(Comment $comment, NeedCategory $category)
+    {
+        $comment->diagnostic()->associate($this);
+        $comment->save();
+    }
+
+    public function comments():BelongsToMany
+    {
+        return $this->belongsToMany(Comment::class);
+    }
+
     /**
      * @return BelongsToMany
      */
@@ -86,5 +97,16 @@ class Diagnostic extends Model
      */
     public function getStatusAttribute():string {
         return config('status.' . $this->step);
+    }
+
+    /**
+     * Retrieves the comment for a given category
+     *
+     * @param $category NeedCategory
+     * @return mixed
+     */
+    public function commentOfCategory(NeedCategory $category)
+    {
+        return Comment::find(['diagnostic_id' => $this->id, 'category_id' => $category->id])->first();
     }
 }

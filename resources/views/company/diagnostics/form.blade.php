@@ -2,7 +2,7 @@
     @csrf
 
     @isset($method)
-    @method($method)
+        @method($method)
     @endif
 
     <div class="form__create__diagnostic">
@@ -21,6 +21,11 @@
                     @empty
                         <p>Cette catégorie ne possède actuellement aucun besoin</p>
                     @endforelse
+                    <div>
+                        <label>Autre (préciser)</label>
+                        <textarea id="comment-{{ $category->id }}"
+                              name="comment-{{ $category->id }}">@if(($comment = $diagnostic->commentOfCategory($category)) != null){{ $comment->content }}@endisset</textarea>
+                    </div>
                 </div>
             </section>
         @empty

@@ -3,8 +3,10 @@
 namespace Tests\Feature;
 
 use App\Models\Company;
+use App\Models\Company\Comment;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\Need;
+use App\Models\Company\NeedCategory;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -19,19 +21,26 @@ class CompanyDiagnosticsTest extends TestCase
     /** @test */
     public function a_user_can_store_diagnostic()
     {
+        $this->withoutExceptionHandling();
+
         $user = $this->signIn();
 
         $needs = factory(Need::class, 3)->create();
+        $categoryId = $needs[1]->category_id;
+        $comments = factory(Comment::class)->raw(['category_id' => $categoryId]);
 
         $attributes = factory(Diagnostic::class)
             ->raw([
                 'needs' => array_map(fn($x) => $x['id'], $needs->toArray())
             ]);
 
-        $this->post(route('company.diagnostics.store'), $attributes);
+        $args = array_merge(['comment-' . $categoryId => $comments['content']], $attributes);
+
+        $this->post(route('company.diagnostics.store'), $args);
         $this->get(route('company.diagnostics.create'))->assertOk();
 
         $this->assertDatabaseHas('company_diagnostics', ['user_id' => $user->id]);
+        $this->assertDatabaseHas('company_comments', $comments);
     }
 
     /** @test */
@@ -126,7 +135,8 @@ class CompanyDiagnosticsTest extends TestCase
         $attributes = factory(Diagnostic::class)
             ->raw([
                 'user_id' => null,
-                'needs' => array_map(fn($x) => $x['id'], $needs->toArray())
+                'needs' => array_map(fn($x) => $x['id'], $needs->toArray()),
+                'comments' => array()
             ]);
 
         $this->get(route('company.diagnostics.create'))->assertOk();
@@ -226,7 +236,7 @@ class CompanyDiagnosticsTest extends TestCase
         $company = factory(Company::class)->create();
 
         $this->post($diagnostic->path() . '/company/set', ['company_id' => $company->id])
-             ->assertRedirect(route('login'));
+            ->assertRedirect(route('login'));
     }
 
     /** @test
@@ -239,9 +249,9 @@ class CompanyDiagnosticsTest extends TestCase
         $diagnostic = factory(Diagnostic::class)->create();
 
         $this->actingAs($diagnostic->user)
-             ->get($diagnostic->path())
-             ->assertOk()
-             ->assertSee(route('companies.create'));
+            ->get($diagnostic->path())
+            ->assertOk()
+            ->assertSee(route('companies.create'));
     }
 
     /** @test
@@ -258,9 +268,27 @@ class CompanyDiagnosticsTest extends TestCase
         $diagnostic->user->companies()->attach($companies);
 
         $this->actingAs($diagnostic->user)
-             ->get($diagnostic->path())
-             ->assertOk()
-             ->assertSee(route('companies.create'))
-             ->assertSee(route('company.diagnostics.set-company', ['diagnostic' => $diagnostic]));
+            ->get($diagnostic->path())
+            ->assertOk()
+            ->assertSee(route('companies.create'))
+            ->assertSee(route('company.diagnostics.set-company', ['diagnostic' => $diagnostic]));
+    }
+
+    /** @test
+     *
+     *  Comments can be added to each needs category
+     */
+    public function it_can_have_comments()
+    {
+        $diagnostic = factory(Diagnostic::class)->create();
+        $category = factory(NeedCategory::class)->create();
+        $comment = factory(Comment::class)->create([
+            'diagnostic_id' => $diagnostic->id,
+            'category_id' => $category->id
+        ]);
+
+        $this->assertDatabaseHas('company_comments', $comment->attributesToArray());
+        $this->assertInstanceOf(NeedCategory::class, $comment->category);
+        $this->assertInstanceOf(Diagnostic::class, $comment->diagnostic);
     }
 }

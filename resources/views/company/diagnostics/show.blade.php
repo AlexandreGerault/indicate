@@ -39,6 +39,13 @@
                                 <li class="need__category__list__item">{{ $need->name }}</li>
                             @endforeach
                         </ul>
+                        <p class="need__category__comment">
+                            @if(($comment = $diagnostic->commentOfCategory($group->first()->category)) != null)
+                                {{ $comment->content }}
+                            @else
+                                Aucune précision
+                            @endif
+                        </p>
                     </div>
                 </div>
             @endforeach
