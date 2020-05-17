@@ -31,18 +31,28 @@ class Diagnostic extends Model
     /**
      * @param Need[] $needs
      */
-    public function addNeeds($needs) {
+    public function addNeeds($needs)
+    {
         $this->needs()->attach($needs);
         $this->save();
     }
 
-    public function addComment(Comment $comment, NeedCategory $category)
+    /**
+     * @param array $comments
+     */
+    public function addComments($comments)
     {
-        $comment->diagnostic()->associate($this);
-        $comment->save();
+        foreach ($comments as $key => $content) {
+            preg_match('#([0-9]+)$#', $key, $matches);
+            $comment = new Comment;
+            $comment->content = $content;
+            $comment->diagnostic()->associate($this);
+            $comment->category()->associate($matches[0]);
+            $comment->save();
+        }
     }
 
-    public function comments():BelongsToMany
+    public function comments(): BelongsToMany
     {
         return $this->belongsToMany(Comment::class);
     }
@@ -50,7 +60,7 @@ class Diagnostic extends Model
     /**
      * @return BelongsToMany
      */
-    public function needs():BelongsToMany
+    public function needs(): BelongsToMany
     {
         return $this->belongsToMany(
             Need::class,
@@ -65,7 +75,7 @@ class Diagnostic extends Model
      *
      * @return BelongsTo
      */
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -75,7 +85,7 @@ class Diagnostic extends Model
      *
      * @return BelongsTo
      */
-    public function company():BelongsTo
+    public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
     }
@@ -85,7 +95,7 @@ class Diagnostic extends Model
      *
      * @return string
      */
-    public function path():string
+    public function path(): string
     {
         return route('company.diagnostics.show', ['diagnostic' => $this], false);
     }
@@ -95,7 +105,8 @@ class Diagnostic extends Model
      *
      * @return string
      */
-    public function getStatusAttribute():string {
+    public function getStatusAttribute(): string
+    {
         return config('status.' . $this->step);
     }
 

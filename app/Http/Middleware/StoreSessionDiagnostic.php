@@ -22,6 +22,7 @@ class StoreSessionDiagnostic
                 'uuid' => uniqid()
             ]);
             $diagnostic->addNeeds($request->session()->get('pending_company_diagnostic')['needs']);
+            $diagnostic->addComments($request->session()->get('pending_company_diagnostic')['comments']);
             $request->session()->forget('pending_company_diagnostic');
 
             return redirect($diagnostic->path());

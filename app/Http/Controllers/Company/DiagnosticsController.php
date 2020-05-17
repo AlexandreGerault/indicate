@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Company;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCompanyDiagnosticRequest;
 use App\Models\Company;
-use App\Models\Company\Comment;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\NeedCategory;
 use Illuminate\Contracts\View\Factory;
@@ -69,17 +68,8 @@ class DiagnosticsController extends Controller
                 'user_id' => auth()->user()->id,
                 'uuid' => uniqid()
             ]);
-
             $diagnostic->addNeeds($needs_validated);
-            foreach ($comments_validated as $key => $content) {
-                preg_match('#([0-9]+)$#', $key, $matches);
-                $categroryId = $matches[0];
-                $comment = new Comment;
-                $comment->content = $content;
-                $comment->diagnostic()->associate($diagnostic);
-                $comment->category()->associate($categroryId);
-                $comment->save();
-            }
+            $diagnostic->addComments($comments_validated);
 
             return redirect($diagnostic->path());
         }
