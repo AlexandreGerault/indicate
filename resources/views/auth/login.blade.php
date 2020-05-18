@@ -39,5 +39,9 @@
         <button type="submit" class="button button__secondary">
             Connexion
         </button>
+
+        <a href="{{ route('register') }}">
+            Je n'ai pas encore de compte
+        </a>
     </form>
 @endsection
