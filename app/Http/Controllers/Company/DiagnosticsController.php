@@ -8,6 +8,7 @@ use App\Models\Company;
 use App\Models\Company\Diagnostic;
 use App\Models\Company\NeedCategory;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
@@ -71,6 +72,7 @@ class DiagnosticsController extends Controller
             $diagnostic->addNeeds($needs_validated);
             $diagnostic->addComments($comments_validated);
 
+//            dd($comments_validated, $diagnostic);
             return redirect($diagnostic->path());
         }
     }
@@ -85,9 +87,19 @@ class DiagnosticsController extends Controller
     {
         if ($diagnostic->user->isNot(auth()->user())) abort(403);
 
-        $groupedNeeds = $diagnostic->needs()->with('category')->get()->groupBy('category.name');
+        $categories = NeedCategory::with(['needs' => function ($q) use ($diagnostic) {
+            $q->whereHas('diagnostics', function($query) use ($diagnostic) {
+                $query->where('diagnostic_id', $diagnostic->id);
+            });
+        }])->get();
 
-        return view('company.diagnostics.show', compact('diagnostic', 'groupedNeeds'));
+        /*$categories = NeedCategory::whereHas('needs', function ($q) use ($diagnostic) {
+            $q->whereHas('diagnostics', function ($query) use ($diagnostic) {
+                $query->where('diagnostic_id', $diagnostic->id);
+            });
+        })->get();*/
+
+        return view('company.diagnostics.show', compact('diagnostic', 'categories'));
     }
 
     /**
@@ -145,16 +157,17 @@ class DiagnosticsController extends Controller
      */
     public function setCompany(Request $request, Diagnostic $diagnostic)
     {
+        dump($request->all());
         $validator = Validator::make($request->all(), [
-            'company_id' => 'required|integer|exists:companies,id'
+            'company' => 'required|integer|exists:companies,id'
         ]);
 
         if (!$validator->fails()) {
-            $diagnostic->company()->associate(Company::find($request->get('company_id')));
+            $diagnostic->company()->associate(Company::find($request->get('company')));
             $diagnostic->save();
             return redirect($diagnostic->path());
         } else {
-            abort(500);
+            dd($validator);
         }
     }
 }

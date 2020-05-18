@@ -6,6 +6,7 @@
     <h1>Ajouter mon entreprise</h1>
 
     <form action="{{ route('companies.store') }}" method="post">
+        @csrf
         <label for="name">Nom de l'entreprise</label>
         <input id="name" name="name" required type="text">
 

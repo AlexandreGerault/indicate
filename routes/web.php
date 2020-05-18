@@ -19,7 +19,7 @@ Auth::routes();
  * Static routes
  */
 Route::get('/', fn() => view('welcome'))->name('landing_page');
-Route::get('dashboard', fn() => view('pages.authenticated.dashboard'))->name('dashboard');
+Route::get('dashboard', 'DashboardController@index')->middleware('auth')->name('dashboard');
 
 /*
  * Resources

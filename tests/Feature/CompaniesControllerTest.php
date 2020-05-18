@@ -43,5 +43,6 @@ class CompaniesControllerTest extends TestCase
         $this->actingAs($user)->post(route('companies.store', $attributes))->assertRedirect();
 
         $this->assertDatabaseHas('companies', $company);
+        $this->assertCount(1, $user->companies);
     }
 }

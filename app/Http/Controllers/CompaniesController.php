@@ -41,6 +41,7 @@ class CompaniesController extends Controller
     public function store(CreateCompanyRequest $request)
     {
         $company = Company::create($request->validated());
+        $company->users()->attach(auth()->user());
         $company->save();
 
         return redirect()->route('companies.show', $company);

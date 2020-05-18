@@ -24,4 +24,14 @@ class Company extends Model
     {
         return $this->belongsToMany(User::class);
     }
+
+    /**
+     * Get the resource path
+     *
+     * @return string
+     */
+    public function path(): string
+    {
+        return route('companies.show', ['company' => $this], false);
+    }
 }

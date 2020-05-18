@@ -57,8 +57,8 @@
                     </a>
                 </li>
                 <li class="navbar__menu__link">
-                    <a class="" href="{{ route('company.diagnostics.index') }}">
-                        Mes diagnostics
+                    <a class="" href="{{ route('dashboard') }}">
+                        Tableau de bord
                     </a>
                 </li>
                 <li class="navbar__menu__link">

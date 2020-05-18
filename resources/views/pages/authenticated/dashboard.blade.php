@@ -13,18 +13,35 @@
 @include('includes.navbar')
 
 <div class="sidebar">
+    @if($last_diagnostics->count() > 0)
     <div class="sidebar__group">
         <h2>Mes derniers diagnostics</h2>
         <ul>
-            <li>Un diagnostic</li>
+            @foreach($last_diagnostics as $diagnostic)
+                <li>
+                    <a href="{{ $diagnostic->path() }}">
+                        {{ $diagnostic->company->name }} : {{ Date::parse($diagnostic->created_at)->format('l j F Y') }}
+                    </a>
+                </li>
+            @endforeach
         </ul>
+        <p><a href="{{ route('company.diagnostics.index') }}">Voir plus</a></p>
     </div>
+    @endif
+    @if($companies->count() > 0)
     <div class="sidebar__group">
         <h2>Mes structures</h2>
         <ul>
-            <li>Une structure</li>
+            @foreach($companies as $company)
+                <li>
+                    <a href="{{ $company->path() }}">
+                        {{ $company->name }}
+                    </a>
+                </li>
+            @endforeach
         </ul>
     </div>
+    @endif
 </div>
 
 <main>
@@ -37,7 +54,7 @@
         <div class="actions__item">
             <h2>Je suis une entreprise en difficulté</h2>
             <p>J'ai besoin de l'aide d'une entreprise pour résoudre quelques problèmes.</p>
-            <a class="actions__item__next" href="">Créer un diagnostic</a>
+            <a class="actions__item__next" href="{{ route('company.diagnostics.create') }}">Créer un diagnostic</a>
         </div>
         <div class="actions__item">
             <h2>Je veux apporter mon aide</h2>
@@ -50,7 +67,8 @@
         <h2>Mes dernières activités</h2>
         <ul class="recent_activities__list">
             <li class="recent_activities__item">
-                <strong>utilisateur</strong>  a action <strong>sujet</strong> <time>il y a 1 jour</time>
+                <strong>utilisateur</strong> a action <strong>sujet</strong>
+                <time>il y a 1 jour</time>
             </li>
         </ul>
     </section>

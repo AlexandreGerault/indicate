@@ -118,6 +118,6 @@ class Diagnostic extends Model
      */
     public function commentOfCategory(NeedCategory $category)
     {
-        return Comment::find(['diagnostic_id' => $this->id, 'category_id' => $category->id])->first();
+        return Comment::where('diagnostic_id', $this->id)->where('category_id', $category->id)->first();
     }
 }
