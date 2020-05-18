@@ -218,7 +218,7 @@ class CompanyDiagnosticsTest extends TestCase
         $company = factory(Company::class)->create();
 
         $this->actingAs($user)
-            ->post($diagnostic->path() . '/company/set', ['company_id' => $company->id])
+            ->post($diagnostic->path() . '/company/set', ['company' => $company->id])
             ->assertRedirect($diagnostic->path());
 
         $diagnostic = $diagnostic->refresh();
