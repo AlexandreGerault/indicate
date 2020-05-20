@@ -14,7 +14,8 @@ class DashboardController extends Controller
 
         $last_diagnostics = auth()->user()->diagnostics->take(5);
         $companies = auth()->user()->companies->take(5);
+        $consultings = auth()->user()->consultings->take(5);
 
-        return view('pages.authenticated.dashboard', compact('last_diagnostics', 'companies'));
+        return view('pages.authenticated.dashboard', compact('last_diagnostics', 'companies', 'consultings'));
     }
 }

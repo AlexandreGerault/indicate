@@ -2,7 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\Company\Comment;
+use App\Models\Company\NeedCategory;
 use App\Models\Consulting\Skill;
+use App\Models\Consulting\SkillCategory;
 use App\Models\Consulting\Specification;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -45,5 +48,16 @@ class Consulting extends Model
     public function path():string
     {
         return route('consultings.show', $this);
+    }
+
+    /**
+     * Retrieves the specification for a given category
+     *
+     * @param $category SkillCategory
+     * @return mixed
+     */
+    public function specificationOfCategory(SkillCategory $category)
+    {
+        return Specification::where('consulting_id', $this->id)->where('category_id', $category->id)->first();
     }
 }

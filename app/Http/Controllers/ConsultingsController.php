@@ -87,12 +87,17 @@ class ConsultingsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
-     * @return Response
+     * @param Consulting $consulting
+     * @return Factory|View
      */
-    public function show($id)
+    public function show(Consulting $consulting)
     {
-        //
+        $categories = Consulting\SkillCategory::with(['skills' => function ($q) use ($consulting) {
+            $q->whereHas('consultings', function($query) use ($consulting) {
+                $query->where('consulting_id', $consulting->id);
+            });
+        }])->get();
+        return view('consultings.show', compact('consulting', 'categories'))->with('consulting', $consulting);
     }
 
     /**

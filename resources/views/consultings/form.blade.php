@@ -2,12 +2,12 @@
     @csrf
 
     <div>
-        <label for="consulting_name">Nom de la société</label>
-        <input type="text" name="consulting_name" id="consulting_name" value="{{ $consulting->name ?? '' }}"/>
+        <label for="name">Nom de la société</label>
+        <input type="text" name="name" id="name" value="{{ $consulting->name ?? '' }}"/>
     </div>
     <div>
-        <label for="responsible_name">Nom du responsable</label>
-        <input type="text" name="responsible_name" id="responsible_name" value="{{ $consulting->responsible ?? ''  }}"/>
+        <label for="responsible">Nom du responsable</label>
+        <input type="text" name="responsible" id="responsible" value="{{ $consulting->responsible ?? ''  }}"/>
     </div>
     <div>
         <label for="phone">Téléphone de contact</label>
@@ -26,7 +26,7 @@
         <div>
         <h3>{{ $category->name }}</h3>
         @foreach($category->skills as $skill)
-            <input id="skill-{{ $skill->id }}" name="skills[]" type="checkbox">
+            <input id="skill-{{ $skill->id }}" name="skills[]" value="{{ $skill->id }}" type="checkbox">
             <label for="skill-{{ $skill->id }}">{{ $skill->name }}</label>
         @endforeach
             <div>

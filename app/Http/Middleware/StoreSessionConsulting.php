@@ -22,18 +22,18 @@ class StoreSessionConsulting
 
             $specsArray = array_map(
                 function ($key, $value) use ($consulting) {
-                    preg_match('#([0-9]+)$#', $key, $matches);
+                    preg_match('#cate([0-9]+)$#', $key, $matches);
                     return Specification::make([
-                        'category_id' => (int) ($matches[0]),
-                        'consulting_id' => (int) $consulting->id ?? null,
-                        'content' => $value
+                        'category_id' => $value['category_id'],
+                        'consulting_id' => (int) $consulting->id,
+                        'content' => $value['content']
                     ])->toArray();
                 },
                 array_keys($request->session()->get('pending_consulting')['specifications']),
                 array_values($request->session()->get('pending_consulting')['specifications'])
             );
 
-            $consulting->skills()->attach($request->session()->get('pending_consulting.skills'));
+            $consulting->skills()->attach($request->session()->get('pending_consulting')['skills']);
             $consulting->specifications()->createMany($specsArray);
             auth()->user()->consultings()->attach($consulting);
             $request->session()->forget('pending_consulting');

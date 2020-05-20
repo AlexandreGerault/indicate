@@ -42,6 +42,20 @@
         </ul>
     </div>
     @endif
+    @if($consultings->count() > 0)
+        <div class="sidebar__group">
+            <h2>Sociétés de conseil</h2>
+            <ul>
+                @foreach($consultings as $consulting)
+                    <li>
+                        <a href="{{ $consulting->path() }}">
+                            {{ $consulting->name }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 </div>
 
 <main>
