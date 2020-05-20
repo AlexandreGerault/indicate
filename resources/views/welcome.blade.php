@@ -66,12 +66,12 @@
 
                 <div class="services__item">
                     <img src="/img/consulting.jpg" alt="Illustration de consulting">
-                    <h3>Un donneur de conseils</h3>
+                    <h3>Une société de conseils</h3>
                     <div class="services__item__desc">
                         <p>Inscrivez-vous et apportez votre expertise en conseils !</p>
                     </div>
                     <p class="services__item__cta">
-                        <a class="button button__dark" href="#">
+                        <a class="button button__dark" href="{{ route('consultings.create') }}">
                             Tester
                         </a>
                     </p>

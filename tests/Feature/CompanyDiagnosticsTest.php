@@ -135,7 +135,7 @@ class CompanyDiagnosticsTest extends TestCase
         $attributes = factory(Diagnostic::class)
             ->raw([
                 'user_id' => null,
-                'needs' => array_map(fn($x) => $x['id'], $needs->toArray()),
+                'needs' => $needs->pluck('id')->toArray(),
                 'comments' => array()
             ]);
 

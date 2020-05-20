@@ -25,6 +25,7 @@ Route::get('dashboard', 'DashboardController@index')->middleware('auth')->name('
  * Resources
  */
 Route::resource('companies', 'CompaniesController');
+Route::resource('consultings', 'ConsultingsController');
 Route::prefix('company')
     ->name('company.')
     ->namespace('Company')

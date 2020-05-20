@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\Company;
+use App\Models\Consulting;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -81,5 +82,10 @@ class User extends Authenticatable
     public function companies():BelongsToMany
     {
         return $this->belongsToMany(Company::class);
+    }
+
+    public function consultings():BelongsToMany
+    {
+        return $this->belongsToMany(Consulting::class);
     }
 }

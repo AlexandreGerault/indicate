@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCompanyDiagnosticRequest extends FormRequest
+class CreateConsultingRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,15 +23,21 @@ class CreateCompanyDiagnosticRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = ['needs' => 'required|array'];
+        $rules = [
+            'name' => 'required|string',
+            'responsible' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'required|email',
+            'skills' => 'required|array'
+        ];
 
-        $comments = array_filter(
-            $this->request->all(),
-            fn($elt) => preg_match('#^comment-[0-9]+$#', $elt),
+        $specifications = array_filter(
+            $this->all(),
+            fn($elt) => preg_match('#^specification-[0-9]+$#', $elt),
             ARRAY_FILTER_USE_KEY
         );
 
-        foreach ($comments as $key => $value) {
+        foreach ($specifications as $key => $value) {
             $rules[$key] = 'nullable|string';
         }
 

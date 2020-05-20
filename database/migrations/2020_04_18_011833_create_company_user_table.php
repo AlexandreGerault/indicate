@@ -14,7 +14,7 @@ class CreateCompanyUserTable extends Migration
     public function up()
     {
         Schema::create('company_user', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->primary(['company_id', 'user_id']);
             $table->unsignedBigInteger('company_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
@@ -41,6 +41,7 @@ class CreateCompanyUserTable extends Migration
     public function down()
     {
         Schema::table('company_user', function (Blueprint $table) {
+            $table->dropPrimary('company_user_company_id_user_id_primary');
             $table->dropForeign('company_user_company_id_foreign');
             $table->dropForeign('company_user_user_id_foreign');
         });

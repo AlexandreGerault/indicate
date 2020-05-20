@@ -20,7 +20,7 @@
             @foreach($last_diagnostics as $diagnostic)
                 <li>
                     <a href="{{ $diagnostic->path() }}">
-                        {{ $diagnostic->company->name }} : {{ Date::parse($diagnostic->created_at)->format('l j F Y') }}
+                        @if(!is_null($company = $diagnostic->company)){{ $company->name }} : @endif{{ Date::parse($diagnostic->created_at)->format('l j F Y') }}
                     </a>
                 </li>
             @endforeach
@@ -60,7 +60,7 @@
             <h2>Je veux apporter mon aide</h2>
             <p>Je suis une structure qui peut apporter son expertise à des porteurs de projet ou à des entreprises en
                 difficultées.</p>
-            <a class="actions__item__next" href="">Renseigner mes services</a>
+            <a class="actions__item__next" href="{{ route('consultings.create') }}">Renseigner mes services</a>
         </div>
     </section>
     <section class="recent_activities">

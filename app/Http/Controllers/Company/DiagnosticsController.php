@@ -157,7 +157,6 @@ class DiagnosticsController extends Controller
      */
     public function setCompany(Request $request, Diagnostic $diagnostic)
     {
-        dump($request->all());
         $validator = Validator::make($request->all(), [
             'company' => 'required|integer|exists:companies,id'
         ]);
@@ -166,8 +165,6 @@ class DiagnosticsController extends Controller
             $diagnostic->company()->associate(Company::find($request->get('company')));
             $diagnostic->save();
             return redirect($diagnostic->path());
-        } else {
-            dd($validator);
         }
     }
 }
