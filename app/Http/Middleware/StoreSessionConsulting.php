@@ -22,7 +22,7 @@ class StoreSessionConsulting
 
             $specsArray = array_map(
                 function ($key, $value) use ($consulting) {
-                    preg_match('#cate([0-9]+)$#', $key, $matches);
+                    preg_match('#category-([0-9]+)$#', $key, $matches);
                     return Specification::make([
                         'category_id' => $value['category_id'],
                         'consulting_id' => (int) $consulting->id,
