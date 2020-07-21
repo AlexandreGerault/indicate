@@ -35,4 +35,5 @@ Route::prefix('company')
         Route::resource('diagnostics', 'DiagnosticsController');
         Route::post('diagnostics/{diagnostic}/company/set', 'DiagnosticsController@setCompany')->name('diagnostics.set-company');
     });
+Route::resource('projects', 'ProjectsController');
 Route::resource('contact', 'ContactController');
