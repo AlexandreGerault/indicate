@@ -48,4 +48,19 @@ class ProjectControllerTest extends TestCase
         $create_response->assertRedirect(route('login'));
         $store_response->assertRedirect(route('login'));
     }
+
+    /** @test */
+    public function a_user_can_show_a_project()
+    {
+        $this->withoutExceptionHandling();
+        $user = $this->signIn();
+
+        $project = factory(Project::class)->create();
+        $project->users()->attach($user);
+        $project->save();
+
+        $response = $this->get(route('projects.show', ["project" => $project]));
+
+        $response->assertOk();
+    }
 }
