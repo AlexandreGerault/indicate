@@ -65,7 +65,7 @@ class ProjectControllerTest extends TestCase
         $response->assertOk();
     }
 
-    /** test
+    /** @test
      *
      * When we validate a step, the next one should be added to the project.
      */
@@ -77,8 +77,7 @@ class ProjectControllerTest extends TestCase
         $project = factory(Project::class)->create();
 
         $this->post(route('projects.steps.submit', [
-            "project" => $project,
-            "step" => $project->steps->first()->id
+            "project" => $project
         ]))->assertRedirect(route('projects.show', ["project" => $project]));
 
         $this->assertCount(2, $project->steps);

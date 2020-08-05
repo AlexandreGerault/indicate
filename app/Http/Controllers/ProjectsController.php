@@ -9,6 +9,7 @@ use App\Models\Step;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Redirector;
 use Illuminate\View\View;
 
@@ -52,7 +53,8 @@ class ProjectsController extends Controller
         return redirect(route('projects.show', ["project" => $project]));
     }
 
-    public function submit(ValidateStepRequest $request, Project $project) {
+    public function submit(Request $request, Project $project) {
+        $project->validateLastStep();
 
         return redirect(route('projects.show', compact('project')));
     }

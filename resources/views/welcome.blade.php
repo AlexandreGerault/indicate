@@ -45,7 +45,7 @@
                         <p>Recevez de l'aide pour créer votre entreprise !</p>
                     </div>
                     <p class="services__item__cta">
-                        <a class="button button__dark" href="#">
+                        <a class="button button__dark" href="{{ route('projects.create') }}">
                             Tester
                         </a>
                     </p>
