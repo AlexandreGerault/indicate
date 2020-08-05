@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\ValidateStepRequest;
 use App\Models\Project;
+use App\Models\Step;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -48,5 +50,10 @@ class ProjectsController extends Controller
         $project->save();
 
         return redirect(route('projects.show', ["project" => $project]));
+    }
+
+    public function submit(ValidateStepRequest $request, Project $project) {
+
+        return redirect(route('projects.show', compact('project')));
     }
 }

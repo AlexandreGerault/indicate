@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Models\Project;
-use App\Models\ProjectStep;
 use App\Models\Step;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -51,16 +50,31 @@ class ProjectTest extends TestCase
         $this->assertCount(2, $project->steps);
     }
 
-    /** @test */
-    public function it_has_a_next_step()
+    /** @test
+     *
+     *  We ensure we at least associate the first step when a project is being created
+     */
+    public function it_has_a_first_step_when_created()
     {
+        $first_step = factory(Step::class)->create(["priority" => 0]);
         $project = factory(Project::class)->create();
 
-        $steps = factory(Step::class, 2)->create();
-        $steps->first()->next()->associate($steps[1]);
-        $steps->first()->save();
-        $project->steps()->attach($steps[0]);
+        $this->assertCount(1, $project->steps);
+        $this->assertEquals($first_step->id, $project->steps->first()->id);
+    }
 
-        $this->assertInstanceOf(Step::class, $project->steps->first()->next);
+    /** @test */
+    public function it_can_validate_last_non_validated_step_and_add_the_next_one()
+    {
+        factory(Step::class, 2)->create(); //ensure there is at least a second step for the test
+        $project = factory(Project::class)->create();
+
+        $first_project_step = $project->steps->first();
+        $project->validateLastStep();
+        $project->load('steps');
+
+
+        $this->assertNotNull($project->steps()->where('step_id', $first_project_step->id)->first()->pivot->validated_at);
+        $this->assertCount(2, $project->steps);
     }
 }

@@ -11,6 +11,8 @@
 |
 */
 
+use App\Models\Project;
+use App\Models\Step;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
@@ -24,8 +26,10 @@ Route::get('dashboard', 'DashboardController@index')->middleware('auth')->name('
 /*
  * Resources
  */
-Route::resource('companies', 'CompaniesController');
+
 Route::resource('consultings', 'ConsultingsController');
+
+Route::resource('companies', 'CompaniesController');
 Route::prefix('company')
     ->name('company.')
     ->namespace('Company')
@@ -35,5 +39,12 @@ Route::prefix('company')
         Route::resource('diagnostics', 'DiagnosticsController');
         Route::post('diagnostics/{diagnostic}/company/set', 'DiagnosticsController@setCompany')->name('diagnostics.set-company');
     });
+
 Route::resource('projects', 'ProjectsController');
+Route::prefix('projects')
+    ->name('projects.')
+    ->group(function () {
+        Route::post('submit/{project}', 'ProjectsController@submit')->name('steps.submit');
+    });
+
 Route::resource('contact', 'ContactController');

@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Project;
+use App\Models\Step;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -62,5 +63,24 @@ class ProjectControllerTest extends TestCase
         $response = $this->get(route('projects.show', ["project" => $project]));
 
         $response->assertOk();
+    }
+
+    /** test
+     *
+     * When we validate a step, the next one should be added to the project.
+     */
+    public function a_new_step_is_added_when_a_step_is_validated()
+    {
+        $this->signIn();
+        $this->withoutExceptionHandling();
+        factory(Step::class, 2)->create(); // we ensure there is at least 2 steps for the test
+        $project = factory(Project::class)->create();
+
+        $this->post(route('projects.steps.submit', [
+            "project" => $project,
+            "step" => $project->steps->first()->id
+        ]))->assertRedirect(route('projects.show', ["project" => $project]));
+
+        $this->assertCount(2, $project->steps);
     }
 }

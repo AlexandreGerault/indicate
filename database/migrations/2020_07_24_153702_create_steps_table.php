@@ -17,7 +17,7 @@ class CreateStepsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->longText('explanations');
-            $table->unsignedBigInteger('next_id')->nullable();
+            $table->unsignedBigInteger('priority')->unique();
             $table->timestamps();
         });
     }
@@ -29,9 +29,6 @@ class CreateStepsTable extends Migration
      */
     public function down()
     {
-        Schema::table('steps', function (Blueprint $table) {
-            $table->dropForeign('steps_next_id_foreign');
-        });
         Schema::dropIfExists('steps');
     }
 }
