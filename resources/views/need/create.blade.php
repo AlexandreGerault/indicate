@@ -1,11 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('title', 'Créer un besoin')
 
 @section('content')
     <div class="container mx-auto">
         @if($categories->count() > 0)
-        <form method="POST" action="{{ route('needs.store') }}">
+        <form method="POST" action="{{ route('company.needs.store') }}">
             <label for="need-name">Nom</label>
             <input class="flat" type="text" placeholder="Réduit des coûts marketing">
 

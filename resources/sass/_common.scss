@@ -1,0 +1,20 @@
+@import 'base/reset';
+
+@import 'abstracts/colors';
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+
+@import 'components/cards';
+@import 'components/forms';
+@import 'components/buttons';
+@import 'components/alerts';
+
+.wrapper {
+    max-width: $breakpoint-xl;
+    margin: auto;
+}
+
+body {
+    color: $grey-900;
+    font-family: 'Roboto', serif;
+}

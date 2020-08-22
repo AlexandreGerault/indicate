@@ -2,7 +2,10 @@
 
 namespace App;
 
+use App\Models\Company;
+use App\Models\Consulting;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -70,6 +73,19 @@ class User extends Authenticatable
      */
     public function diagnostics():HasMany
     {
-        return $this->hasMany(Diagnostic::class);
+        return $this->hasMany(Models\Company\Diagnostic::class);
+    }
+
+    /**
+     * @return BelongsToMany
+     */
+    public function companies():BelongsToMany
+    {
+        return $this->belongsToMany(Company::class);
+    }
+
+    public function consultings():BelongsToMany
+    {
+        return $this->belongsToMany(Consulting::class);
     }
 }

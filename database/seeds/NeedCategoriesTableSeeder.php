@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class NeedCategoriesTableSeeder extends Seeder
 {
@@ -11,7 +12,7 @@ class NeedCategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        \Illuminate\Support\Facades\DB::table('need_categories')->insert(
+        DB::table('company_need_categories')->insert(
             [
                 ['name' => 'Finance'],
                 ['name' => 'Clientèle'],

@@ -2,8 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Need;
-use App\NeedCategory;
+use App\Models\Company\Need;
 use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +21,7 @@ class NeedsTest extends TestCase
         factory(Need::class)->create();
 
         $this->actingAs($user = factory(User::class)->create())
-            ->get(route('needs.create'))
+            ->get(route('company.needs.create'))
             ->assertStatus(200)
             ->assertSee('submit');
     }
@@ -33,9 +32,9 @@ class NeedsTest extends TestCase
         $attributes = factory(Need::class)->raw();
 
         $this->actingAs($user = factory(User::class)->create())
-            ->post(route('needs.store'), $attributes);
+            ->post(route('company.needs.store'), $attributes);
 
-        $this->assertDatabaseHas('needs', $attributes);
+        $this->assertDatabaseHas('company_needs', $attributes);
     }
 
     /** @test */
@@ -44,15 +43,15 @@ class NeedsTest extends TestCase
         $need = factory(Need::class)->create();
 
         $this->actingAs($user = factory(User::class)->create())
-            ->get(route('need-categories.edit', ['need_category' => $need->category]))
+            ->get(route('company.need-categories.edit', ['need_category' => $need->category]))
             ->assertStatus(200);
     }
 
     /** @test */
     public function a_guest_cannot_add_a_need()
     {
-        $this->get(route('needs.create'))->assertStatus(403);
-        $this->post(route('needs.store'))->assertStatus(403);
+        $this->get(route('company.needs.create'))->assertStatus(403);
+        $this->post(route('company.needs.store'))->assertStatus(403);
     }
 
     /** @test */

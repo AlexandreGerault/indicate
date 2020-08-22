@@ -1,0 +1,74 @@
+.navbar {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 space(8);
+    font-size: 1.25rem;
+
+    &__hamburger {
+        display: none;
+    }
+
+    &__menu {
+        display: flex;
+
+        &__link, &__link input[type="submit"] {
+            border: none;
+            background: none;
+            margin: 0 space(2);
+            font-family: inherit;
+            font-size: 1.25rem;
+            line-height: 1.25rem;
+            color: inherit;
+            cursor: pointer;
+
+            &:last-child {
+                margin: 0;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1280px) {
+        & {
+            position: relative;
+        }
+
+        &__hamburger {
+            display: block;
+            cursor: pointer;
+        }
+
+        &__menu {
+            position: absolute;
+            display: none;
+            right: space(4);
+            top: space(8);
+            flex-direction: column;
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            z-index: 99;
+            padding: space(2);
+        }
+
+        &__menu__visible {
+            display: flex;
+        }
+
+        &__menu__link, &__menu__link input[type="submit"] {
+            text-align: center;
+            margin: 0 0 space(2) 0;
+        }
+    }
+
+    &__left a {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            margin-right: space(2);
+        }
+    }
+}

@@ -12,39 +12,39 @@ class NeedsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('needs')->insert(
+        DB::table('company_needs')->insert(
             [
                 [
                     'name' => 'Augmentation des recettes',
-                    'category_id' => \App\NeedCategory::where('name', 'Finance')->first()->id
+                    'category_id' => \App\Models\Company\NeedCategory::where('name', 'Finance')->first()->id
                 ],
                 [
                     'name' => 'Diminution des charges',
-                    'category_id' => \App\NeedCategory::where('name', 'Finance')->first()->id
+                    'category_id' => \App\Models\Company\NeedCategory::where('name', 'Finance')->first()->id
                 ],
                 [
                     'name' => 'Fidélisation',
-                    'category_id' => \App\NeedCategory::where('name', 'Clientèle')->first()->id
+                    'category_id' => \App\Models\Company\NeedCategory::where('name', 'Clientèle')->first()->id
                 ],
                 [
                     'name' => 'Satisfaction client',
-                    'category_id' => \App\NeedCategory::where('name', 'Clientèle')->first()->id
+                    'category_id' => \App\Models\Company\NeedCategory::where('name', 'Clientèle')->first()->id
                 ],
                 [
                     'name' => 'Susciter la réaction du client',
-                    'category_id' => \App\NeedCategory::where('name', 'Clientèle')->first()->id
+                    'category_id' => \App\Models\Company\NeedCategory::where('name', 'Clientèle')->first()->id
                 ],
                 [
                     'name' => 'RSE',
-                    'category_id' => \App\NeedCategory::where('name', 'Communication')->first()->id
+                    'category_id' => \App\Models\Company\NeedCategory::where('name', 'Communication')->first()->id
                 ],
                 [
                     'name' => 'Valeur ajoutée',
-                    'category_id' => \App\NeedCategory::where('name', 'Produit')->first()->id
+                    'category_id' => \App\Models\Company\NeedCategory::where('name', 'Produit')->first()->id
                 ],
                 [
                     'name' => 'Technologie interne',
-                    'category_id' => \App\NeedCategory::where('name', 'Produit')->first()->id
+                    'category_id' => \App\Models\Company\NeedCategory::where('name', 'Produit')->first()->id
                 ],
 
             ]
